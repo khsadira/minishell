@@ -27,7 +27,7 @@ void	ft_freelst(t_lst *list)
 
 void	ft_freeenv(t_env *list)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
 	while (list)
 	{
