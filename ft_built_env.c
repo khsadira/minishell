@@ -56,8 +56,6 @@ static t_env	*ft_setenv(t_lst *list, t_env *l_env)
 
 t_env	*ft_built_env(t_lst *list, t_env *l_env, int builtin, char **env)
 {
-	if (l_env == NULL)
-		l_env = ft_creat_env(env, l_env);
 	if (builtin == 1)
 		ft_printenv(l_env);
 	else if (builtin == 2)

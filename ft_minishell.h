@@ -22,11 +22,12 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
+char	**ft_treat_line(char const *str);
 void	ft_freeenv(t_env *list);
 t_env	*ft_creat_env(char **env, t_env *l_env);
 t_env	*ft_built_env(t_lst *list, t_env *l_env, int builtin, char **env);
 void	ft_built_echo(t_lst *list);
-void	ft_built_cd(t_lst *list);
+void	ft_built_cd(t_lst *list, t_env *env);
 t_env	*ft_addenv(t_env *list, t_env *new_ele);
 t_env	*ft_newenv(char *name, char *arg);
 int	ft_check_built(t_lst *list);

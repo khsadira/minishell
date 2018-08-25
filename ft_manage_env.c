@@ -27,6 +27,21 @@ static	char	*ft_return_name(char *str)
 	return (name);
 }
 
+static char	*ft_up_shlvl(char *arg)
+{
+	char	*ret;
+	int	len;
+	int	i;
+	int	nb;
+
+	nb = ft_atoi(arg);
+	i = 0;
+	nb++;
+	free(arg);
+	ret = ft_itoa(nb);
+	return (ret);
+}
+
 t_env	*ft_creat_env(char **env, t_env *l_env)
 {
 	char	*name;
@@ -39,6 +54,8 @@ t_env	*ft_creat_env(char **env, t_env *l_env)
 	{
 		name = ft_return_name(env[i]);
 		arg = ft_return_arg(env[i]);
+		if (ft_strequ(name, "SHLVL"))
+			arg = ft_up_shlvl(arg);
 		new_ele = ft_newenv(name, arg);
 		l_env = ft_addenv(l_env, new_ele);
 		i++;

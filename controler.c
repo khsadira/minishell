@@ -104,7 +104,7 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 			{
 				path = ft_strjoin(path_tab[i], "/");
 				path = ft_strfjoin(&path, cmd);
-				if (access(path, R_OK || X_OK) == 0)
+				if (!ft_strequ(cmd, "..") && !ft_strequ(cmd, ".") && access(path, R_OK || X_OK) == 0)
 				{
 					com = 1;
 					new_ele = ft_newele(ft_strdup(path));
@@ -166,6 +166,7 @@ int 	main(int ac, char **av, char **env)
 	path_tab = NULL;
 	list = NULL;
 	l_env = NULL;
+	l_env = ft_creat_env(env, l_env);
 	h_env = NULL;
 	path = ft_get_path(env, path);
 	path_tab = ft_strsplit(path, ':');
@@ -175,11 +176,11 @@ int 	main(int ac, char **av, char **env)
 		ft_putstr("$>");
 		if (get_next_line(0, &line) > 0)
 		{
-			gnl_word = ft_strsplit(line, ';');
+			gnl_word = ft_treat_line(line);
 			free(line);
 		}
 		else
-			gnl_word = ft_strsplit(line, ';');
+			gnl_word = ft_treat_line(line);
 		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word);
 		head = list;
 		while (list)
@@ -199,7 +200,7 @@ int 	main(int ac, char **av, char **env)
 				else if (builtin == 4)
 					ft_built_echo(list);
 				else if (builtin == 5)
-					ft_built_cd(list);
+					ft_built_cd(list, l_env);
 			}
 			else
 			{

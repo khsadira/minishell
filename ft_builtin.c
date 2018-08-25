@@ -4,8 +4,10 @@ void	ft_built_echo(t_lst *list)
 {
 }
 
-void	ft_built_cd(t_lst *list)
+void	ft_built_cd(t_lst *list, t_env *env)
 {
+	printf("%s\n", env->name);
+	chdir(list->arg[1]);
 }
 
 int	ft_check_built(t_lst *list)

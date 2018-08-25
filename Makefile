@@ -4,7 +4,7 @@ CC	=	gcc
 
 CFLAGS	=	#-Wall -Wextra -Werror
 
-SRC	=	ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
+SRC	=	ft_treat_line.c ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
 
 OBJ	=	$(SRC:.c=.o)
 
