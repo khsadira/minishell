@@ -51,7 +51,7 @@ static char	*ft_to_command(char *str)
 	return (ft_strsub(str, j, i - j));
 }
 
-static char	*ft_strfjoin(char **over, char *buff)
+/*static char	*ft_strfjoin(char **over, char *buff)
 {
 	int	over_s;
 	int	buff_s;
@@ -70,7 +70,8 @@ static char	*ft_strfjoin(char **over, char *buff)
 	tmp[over_s + buff_s] = '\0';
 	free(*over);
 	return (tmp);
-}
+}*/
+
 static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 {
 	int	i;

@@ -21,5 +21,6 @@
 # define BUFF_SIZE 100
 
 int		get_next_line(const int fd, char **line);
+char		*ft_strfjoin(char **over, char *buff);
 
 #endif

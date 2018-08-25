@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static char	*ft_strfjoin(char **over, char *buff)
+char	*ft_strfjoin(char **over, char *buff)
 {
 	int		over_s;
 	int		buff_s;

@@ -1,14 +1,10 @@
 #include "ft_minishell.h"
 
-void	ft_built_echo(t_lst *list)
+int	ft_built_echo(t_lst *list)
 {
+	return (1);
 }
 
-void	ft_built_cd(t_lst *list, t_env *env)
-{
-	printf("%s\n", env->name);
-	chdir(list->arg[1]);
-}
 
 int	ft_check_built(t_lst *list)
 {
