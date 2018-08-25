@@ -51,27 +51,6 @@ static char	*ft_to_command(char *str)
 	return (ft_strsub(str, j, i - j));
 }
 
-/*static char	*ft_strfjoin(char **over, char *buff)
-{
-	int	over_s;
-	int	buff_s;
-	char	*tmp;
-
-	over_s = 0;
-	buff_s = 0;
-	if (*over)
-		over_s = ft_strlen(*over);
-	if (buff)
-		buff_s = ft_strlen(buff);
-	if (!(tmp = (char*)malloc(sizeof(char) * (buff_s + over_s + 1))))
-		return (NULL);
-	ft_memcpy(tmp, *over, over_s);
-	ft_memcpy(tmp + over_s, buff, buff_s);
-	tmp[over_s + buff_s] = '\0';
-	free(*over);
-	return (tmp);
-}*/
-
 static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 {
 	int	i;
@@ -160,7 +139,9 @@ int 	main(int ac, char **av, char **env)
 	t_env	*l_env;
 	t_env	*h_env;
 	int	builtin;
+	char	*current_dir;
 
+	current_dir = NULL;
 	path = NULL;
 	line = NULL;
 	gnl_word = NULL;
@@ -201,7 +182,7 @@ int 	main(int ac, char **av, char **env)
 				else if (builtin == 4)
 					ft_built_echo(list);
 				else if (builtin == 5)
-					ft_built_cd(list, l_env);
+					ft_built_cd(list, l_env, &current_dir);
 			}
 			else
 			{
