@@ -66,17 +66,21 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 	path = NULL;
 	j = 0;
 	com = 0;
+
 	while (cmd_word[j])
 	{
 		cmd = ft_to_command(cmd_word[j]);
 		i = 0;
-		if (ft_strequ(cmd, "exit") || ft_strequ(cmd, "env") || ft_strequ(cmd, "setenv") ||
+		if ((ft_strnequ(cmd, "./", 2)) || ft_strequ(cmd, "exit") || ft_strequ(cmd, "env") || ft_strequ(cmd, "setenv") ||
 			ft_strequ(cmd, "unsetenv") || ft_strequ(cmd, "cd") || ft_strequ(cmd, "echo"))
 		{
 			com = 1;
 			new_ele = ft_newele(ft_strdup(cmd));
 			new_ele->cmd = ft_strdup(cmd);
-			new_ele->built = 1;
+			if (ft_strnequ(cmd, "./", 2))
+				new_ele->built = 0;
+			else
+				new_ele->built = 1;
 			list = ft_addlist(list, new_ele);
 		}
 		else
@@ -126,6 +130,12 @@ static pid_t	ft_fork(char *path, char **arg, char **env)
 	return (1);
 }
 
+static void sig_handler(int signo)
+{
+  if (signo == SIGINT)
+    return ;
+}
+
 int 	main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -139,30 +149,37 @@ int 	main(int ac, char **av, char **env)
 	t_env	*l_env;
 	t_env	*h_env;
 	int	builtin;
-	char	*current_dir;
 
-	current_dir = NULL;
 	path = NULL;
 	line = NULL;
 	gnl_word = NULL;
 	path_tab = NULL;
 	list = NULL;
 	l_env = NULL;
+	env = ft_push_shlvl(env);
 	l_env = ft_creat_env(env, l_env);
 	h_env = NULL;
 	path = ft_get_path(env, path);
 	path_tab = ft_strsplit(path, ':');
 	free(path);
+  
+	if (signal(SIGINT, sig_handler) == SIG_ERR)
+	  ;
+
 	while (1)
 	{
 		ft_putstr("$>");
 		if (get_next_line(0, &line) > 0)
 		{
-			gnl_word = ft_treat_line(line);
+			line = ft_ask_quote(line);
+			gnl_word = ft_treat_line(line, ';');
 			free(line);
 		}
 		else
-			gnl_word = ft_treat_line(line);
+		{
+			line = ft_ask_quote(line);
+			gnl_word = ft_treat_line(line, ';');
+		}
 		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word);
 		head = list;
 		while (list)
@@ -180,9 +197,9 @@ int 	main(int ac, char **av, char **env)
 				else if (builtin >= 1 && builtin <= 3)
 					l_env = ft_built_env(list, l_env, builtin, env);
 				else if (builtin == 4)
-					ft_built_echo(list);
+					ft_built_echo(list, l_env);
 				else if (builtin == 5)
-					ft_built_cd(list, l_env, &current_dir);
+					ft_built_cd(list, &l_env);	
 			}
 			else
 			{
@@ -196,5 +213,4 @@ int 	main(int ac, char **av, char **env)
 		ft_freedstr(gnl_word);
 		ft_freelst(head);
 	}
-	ft_freedstr(path_tab);
 }

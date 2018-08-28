@@ -16,6 +16,8 @@ static	t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 	t_env	*h_env;
 	t_env	*tmp;
 
+	if (ft_strequ(list->arg[1], "HOME"))
+		return (l_env);
 	h_env = l_env;
 	while (l_env)
 	{
@@ -31,14 +33,36 @@ static	t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 	return (h_env);
 }
 
-static t_env	*ft_setenv(t_lst *list, t_env *l_env)
+t_env	*ft_setenv_char(char *name, t_env *env)
 {
-	int	i;
 	t_env	*h_env;
-	t_env	*tmp;
+
+	h_env = env;
+	while (env)
+	{
+		if (ft_strequ(env->name, name) == 1)
+		{
+			if (env->arg)
+				free(env->arg);
+			env->arg = getcwd(NULL, 0);
+			return (h_env);
+		}
+		env = env->next;
+	}
+	env = ft_newenv(ft_strdup(name), getcwd(NULL, 0));
+	h_env = ft_addenv(h_env, env);
+	return (h_env);
+}
+
+t_env	*ft_setenv(t_lst *list, t_env *l_env)
+{
+	t_env	*h_env;
 
 	h_env = l_env;
-	i = 0;
+	if (!list->arg[1])
+		return (h_env);
+	if (!list->arg[2])
+		list->arg[2] = ft_strdup("");
 	while (l_env)
 	{
 		if (ft_strequ(l_env->name, list->arg[1]))

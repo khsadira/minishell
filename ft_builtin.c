@@ -1,11 +1,5 @@
 #include "ft_minishell.h"
 
-int	ft_built_echo(t_lst *list)
-{
-	return (1);
-}
-
-
 int	ft_check_built(t_lst *list)
 {
 	if (ft_strequ(list->cmd, "exit"))

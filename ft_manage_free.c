@@ -5,7 +5,7 @@ void	ft_freedstr(char **arg)
 	int	i;
 
 	i = 0;
-	while ((arg)[i])
+	while (*arg && arg && (arg)[i])
 		free((arg)[i++]);
 	free(arg);
 }

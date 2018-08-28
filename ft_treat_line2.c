@@ -12,100 +12,94 @@
 
 #include "ft_minishell.h"
 
-static const char	*next_word(const char *str, char c)
-{
-	while (*str && *str == c)
-	{
-		if (*str == '"')
-		{
-			str++;
-			while (*str && *str != '"')
-				str++;
-		}
-		if (*str == '\'')
-		{
-			str++;
-			while (*str && *str != '\'')
-				str++;
-		}
-		str++;
-	}
-	return (str);
-}
-
-static const char	*next_word_0(const char *str, char c)
-{
-	while (*str && *str != c)
-	{
-		if (*str == '"')
-		{
-			str++;
-			while (*str && *str != '"')
-				str++;
-		}
-		if (*str == '\'')
-		{
-			str++;
-			while (*str && *str != '\'')
-				str++;
-		}
-		str++;
-	}
-	return (str);
-}
-
-static int			nb_words(const char *str, char c)
+int				nb_words(char const *str, char const c)
 {
 	int	i;
+	int	nb;
 
 	i = 0;
-	while (*str)
+	nb = 1;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		str = next_word(str, c);
-		if (*str)
+		if (str[i] == '"')
 		{
 			i++;
-			str = next_word_0(str, c);
+			while (str[i] && str[i] != '"')
+				i++;
+			i++;
 		}
+		else if (str[i] == '\'')
+		{
+			i++;
+			while (str[i] && str[i] != '\'')
+				i++;
+			i++;
+		}
+		else if (str[i] == ' ')
+		{
+			nb++;
+			while (str[i] && str[i] == ' ')
+				i++;
+		}
+		else
+			i++;
 	}
-	return (i);
+	return (nb);
 }
 
-static char			**cleantable(char **tab, int i)
-{
-	int	a;
-
-	a = 0;
-	while (a < i)
-		free(tab[a]);
-	free(tab);
-	return (NULL);
-}
-
-char				**ft_treat_line(char const *str, char const c)
+char				**ft_treat_line2(char const *str, char const c)
 {
 	char		**tab;
-	const char	*word;
-	int			i;
+	char		*word;
+	int		i;
+	int		j;
+	int		a;
+	int		len;
 
+	len = ft_strlen(str);
+	a = 0;
+	j = 0;
 	i = 0;
+	tab = NULL;
 	if (str == NULL)
 		return (NULL);
 	if (!(tab = (char **)malloc(sizeof(char *) * (nb_words(str, c) + 1))))
 		return (NULL);
-	while (*str)
+	while (str[i])
 	{
-		str = next_word(str, c);
-		if (*str)
+		if (str[i] && str[i] == '"')
 		{
-			word = next_word_0(str, c);
-			tab[i] = ft_strsub(str, 0, word - str);
-			if (tab[i] == NULL)
-				return (cleantable(tab, i));
-			i++;
-			str = word;
+			j = i++;
+			j++;
+			while (str[i] && str[i] != '"')
+				i++;
+			tab[a++] = ft_strsub(str, j, i++ - j);
 		}
+		else if (str[i] && str[i] == '\'')
+		{
+			j = i++;
+			j++;
+			while (str[i] && str[i] != '\'')
+				i++;
+			tab[a++] = ft_strsub(str, j, i++ - j);
+		}
+		else if (str[i] && str[i] != c)
+		{
+			while (str[i] && str[i] == c)
+				i++;
+			j = i++;
+			while (str[i] && str[i] != c)
+				i++;
+			if (j != i)
+				tab[a++] = ft_strsub(str, j, i - j);
+		}
+		else
+			i++;
 	}
-	tab[i] = 0;
+	tab[a] = 0;
 	return (tab);
 }

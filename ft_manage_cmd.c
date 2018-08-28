@@ -5,7 +5,11 @@ static char	**ft_manage_arg(char **arg)
 	int	i;
 	int	j;
 	int	k;
+	int	q;
+	int	dq;
 
+	dq = 0;
+	q = 0;
 	i = 0;
 	while (arg[i])
 	{
@@ -15,7 +19,21 @@ static char	**ft_manage_arg(char **arg)
 			j++;
 		while (arg[i][j])
 		{
-			if (arg[i][j] == ' ')
+			if (arg[i][j] == '"' && q == 0)
+			{
+				if (dq == 0)
+					dq = 1;
+				else
+					dq = 0;
+			}
+			else if (arg[i][j] == '\'' && dq == 0)
+			{
+				if (q == 0)
+					q = 1;
+				else
+					q = 0;
+			}
+			else if (arg[i][j] == ' ' && dq== 0 && q == 0)
 			{
 				while (arg[i][j] && arg[i][j] == ' ')
 					j++;
@@ -29,7 +47,6 @@ static char	**ft_manage_arg(char **arg)
 			arg[i][k++] = '\0';
 		i++;
 	}
-	i = 0;
 	return (arg);
 }
 
@@ -44,7 +61,7 @@ t_lst	*ft_put_cmd(t_lst *list, char **arg)
 	i = 0;
 	while (list)
 	{
-		list->arg = ft_strsplit(arg[i], ' ');
+		list->arg = ft_treat_line2(arg[i], ' ');
 		i++;
 		list = list->next;
 	}
