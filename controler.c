@@ -156,7 +156,7 @@ int 	main(int ac, char **av, char **env)
 	path_tab = NULL;
 	list = NULL;
 	l_env = NULL;
-	env = ft_push_shlvl(env);
+	//env = ft_push_shlvl(env);
 	l_env = ft_creat_env(env, l_env);
 	h_env = NULL;
 	path = ft_get_path(env, path);

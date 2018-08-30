@@ -5,9 +5,16 @@ void	ft_freedstr(char **arg)
 	int	i;
 
 	i = 0;
-	while (*arg && arg && (arg)[i])
-		free((arg)[i++]);
-	free(arg);
+	printf("here1\n");
+	while (arg[i])
+	{
+		free(arg[i]);
+		i++;
+	}
+	printf("here2\n");
+	if (arg)
+		free(arg);
+	printf("here3\n");
 }
 
 void	ft_freelst(t_lst *list)
