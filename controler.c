@@ -1,31 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   controler.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
+/*   Updated: 2018/09/05 17:26:50 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "ft_minishell.h"
 
-static char	*ft_get_path(char **env, char *elem)
+static char	**ft_get_path(t_env *env)
 {
-	int	a;
-	int	b;
-	int	k;
-
-	a = 0;
-	while (env[a])
+	while (env)
 	{
-		b = 0;
-		while (env[a][b])
-		{
-			if (env[a][b] == 'P' && env[a][b + 4] &&
-				env[a][b + 1] == 'A' && env[a][b + 2] == 'T' &&
-				env[a][b + 3] == 'H' && env[a][b + 4] == '=')
-			{
-				b += 5;
-				k = b;
-				while (env[a][k] && env[a][k] != '\n')
-					k++;
-				elem = ft_strsub(env[a], b, k);
-				return (elem);
-			}
-			b++;
-		}
-		a++;
+		if (ft_strequ(env->name, "PATH"))
+			return (ft_strsplit(env->arg, ':'));
+		env = env->next;
 	}
 	return (NULL);
 }
@@ -35,7 +29,7 @@ static char	*ft_to_command(char *str)
 	char	*cmd;
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (str[j] && str[j] == ' ')
@@ -83,7 +77,8 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 				new_ele->built = 1;
 			list = ft_addlist(list, new_ele);
 		}
-		else
+		else if (cmd && cmd[0])
+		{
 			while (path_tab[i])
 			{
 				path = ft_strjoin(path_tab[i], "/");
@@ -99,7 +94,8 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 				free(path);
 				i++;
 			}	
-		if (com == 0)
+		}
+		if (com == 0 && cmd && cmd[0])
 		{
 			ft_putstr("minishell: command not found: ");
 			ft_putendl(cmd);
@@ -140,7 +136,6 @@ int 	main(int ac, char **av, char **env)
 {
 	char	*line;
 	char	**gnl_word;
-	char	*path;
 	char	**path_tab;
 	int	i;
 	int	pid_value;;
@@ -150,19 +145,15 @@ int 	main(int ac, char **av, char **env)
 	t_env	*h_env;
 	int	builtin;
 
-	path = NULL;
+
 	line = NULL;
 	gnl_word = NULL;
 	path_tab = NULL;
 	list = NULL;
 	l_env = NULL;
-	//env = ft_push_shlvl(env);
 	l_env = ft_creat_env(env, l_env);
 	h_env = NULL;
-	path = ft_get_path(env, path);
-	path_tab = ft_strsplit(path, ':');
-	free(path);
-  
+ 	 
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 	  ;
 
@@ -180,7 +171,8 @@ int 	main(int ac, char **av, char **env)
 			line = ft_ask_quote(line);
 			gnl_word = ft_treat_line(line, ';');
 		}
-		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word);
+		path_tab = ft_get_path(l_env);
+		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env);
 		head = list;
 		while (list)
 		{
@@ -210,6 +202,7 @@ int 	main(int ac, char **av, char **env)
 			}
 			list = list->next;
 		}
+		ft_freedstr(path_tab);
 		ft_freedstr(gnl_word);
 		ft_freelst(head);
 	}

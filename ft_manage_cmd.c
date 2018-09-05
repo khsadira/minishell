@@ -33,7 +33,7 @@ static char	**ft_manage_arg(char **arg)
 				else
 					q = 0;
 			}
-			else if (arg[i][j] == ' ' && dq== 0 && q == 0)
+			else if (arg[i][j] == ' ' && dq == 0 && q == 0)
 			{
 				while (arg[i][j] && arg[i][j] == ' ')
 					j++;
@@ -47,21 +47,24 @@ static char	**ft_manage_arg(char **arg)
 			arg[i][k++] = '\0';
 		i++;
 	}
+	arg[i] = 0;
 	return (arg);
 }
 
-t_lst	*ft_put_cmd(t_lst *list, char **arg)
+t_lst	*ft_put_cmd(t_lst *list, char **arg, t_env *env)
 {
 	t_lst	*head;
-	char	*cmd;
-	int	i;
+	int		i;
 
 	head = list;
 	arg = ft_manage_arg(arg);
+
 	i = 0;
 	while (list)
 	{
-		list->arg = ft_treat_line2(arg[i], ' ');
+		if (ft_strequ(arg[i], ""))
+				i++;
+		list->arg = ft_treat_line2(arg[i], ' ', env);
 		i++;
 		list = list->next;
 	}
