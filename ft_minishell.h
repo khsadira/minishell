@@ -23,13 +23,14 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
-t_lst	*ft_rework_arg(t_lst *list, t_env *env);
+void	ft_signal(void);
+void	ft_exec(t_lst *list, char **env);
+void	ft_freeall_exit(char **ret, char **gnl, t_lst *list, t_env *env);
+char	**ft_rework_cmd(char **arg, t_env *env);
 t_env	*ft_setenv_char(char *name, t_env *env);
 char	*ft_search_env(char *str, t_env *env);
 t_env	*ft_setenv(t_lst *list, t_env *l_env);
 char	*ft_ask_quote(char *str);
-char	**ft_treat_line(char const *str, char const c);
-char	**ft_treat_line2(char const *str, char const c, t_env *env);
 void	ft_freeenv(t_env *list);
 t_env	*ft_creat_env(char **env, t_env *l_env);
 t_env	*ft_built_env(t_lst *list, t_env *l_env, int builtin, char **env);

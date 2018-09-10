@@ -6,10 +6,9 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 10:04:47 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/10 14:19:26 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_minishell.h"
 
@@ -51,7 +50,7 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 	int	j;
 	char	*path;
 	char	*cmd;
-	int	com;
+	int		com;
 	t_lst	*list;
 	t_lst	*new_ele;
 
@@ -107,84 +106,39 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 	return (list);
 }
 
-static pid_t	ft_fork(char *path, char **arg, char **env)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(path, arg, env);
-		return (0);
-	}
-	else if (pid < 0)
-	{
-		ft_putendl("fork error.");
-		return (-1);
-	}
-	wait(&pid);
-	return (1);
-}
-
-static void sig_handler(int signo)
-{
-  if (signo == SIGINT)
-    return ;
-}
-
 int 	main(int ac, char **av, char **env)
 {
 	char	*line;
 	char	**gnl_word;
 	char	**path_tab;
-	int	i;
-	int	pid_value;;
 	t_lst	*list;
 	t_lst	*head;
 	t_env	*l_env;
-	int	builtin;
+	int		builtin;
 
 	line = NULL;
-	gnl_word = NULL;
-	path_tab = NULL;
 	list = NULL;
-	l_env = NULL;
 	l_env = ft_creat_env(env, l_env);
- 	 
-	if (signal(SIGINT, sig_handler) == SIG_ERR)
-	  ;
-
 	while (1)
 	{
+		ft_signal();
 		ft_putstr("$>");
 		if (get_next_line(0, &line) > 0)
 		{
-			line = ft_ask_quote(line);
-			//gnl_word = ft_treat_line(line, ';');
-			gnl_word = ft_strsplit(line, ';');
+			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
 			free(line);
 		}
 		else
-		{
-			line = ft_ask_quote(line);
-			//gnl_word = ft_treat_line(line, ';');
-			gnl_word = ft_strsplit(line, ';');
-		}
+			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
 		path_tab = ft_get_path(l_env);
-		list = ft_rework_arg(ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env), l_env);
+		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env);
 		head = list;
 		while (list)
 		{
 			if (list->built == 1)
 			{
 				if ((builtin = ft_check_built(list)) == 0)
-				{
-					ft_freedstr(path_tab);
-					ft_freedstr(gnl_word);
-					ft_freelst(head);
-					ft_freeenv(l_env);
-					exit(1);
-				}
+					ft_freeall_exit(path_tab, gnl_word, head, l_env);
 				else if (builtin >= 1 && builtin <= 3)
 					l_env = ft_built_env(list, l_env, builtin, env);
 				else if (builtin == 4)
@@ -193,12 +147,7 @@ int 	main(int ac, char **av, char **env)
 					ft_built_cd(list, &l_env);	
 			}
 			else
-			{
-				pid_value = ft_fork(list->path, list->arg, env);
-				if (pid_value != 0 && pid_value != -1 && pid_value != -2)
-					list->value = pid_value;
-				pid_value = 0;
-			}
+				ft_exec(list, env);
 			list = list->next;
 		}
 		ft_freedstr(path_tab);

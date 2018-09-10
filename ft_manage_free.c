@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_manage_free.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/10 13:48:59 by khsadira          #+#    #+#             */
+/*   Updated: 2018/09/10 13:49:54 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
 void	ft_freedstr(char **arg)
@@ -41,4 +53,13 @@ void	ft_freeenv(t_env *list)
 		list = list->next;
 		free(tmp);
 	}
+}
+
+void	ft_freeall_exit(char **ret, char **gnl, t_lst *list, t_env *env)
+{
+	ft_freedstr(ret);
+	ft_freedstr(gnl);
+	ft_freelst(list);
+	ft_freeenv(env);
+	exit(1);
 }
