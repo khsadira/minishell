@@ -6,7 +6,7 @@
 #    By: khsadira <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/04 14:29:26 by khsadira          #+#    #+#              #
-#    Updated: 2018/09/04 14:29:27 by khsadira         ###   ########.fr        #
+#    Updated: 2018/09/10 11:48:20 by khsadira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC	=	gcc
 
 CFLAGS	=	#-Wall -Wextra -Werror
 
-SRC	=	ft_built_echo.c ft_ask_quote.c ft_treat_line2.c ft_built_cd.c ft_treat_line.c ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
+SRC		=	ft_rework_arg.c ft_built_echo.c ft_ask_quote.c ft_treat_line2.c ft_built_cd.c ft_treat_line.c ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
 
 OBJ	=	$(SRC:.c=.o)
 

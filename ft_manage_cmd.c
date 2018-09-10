@@ -64,7 +64,8 @@ t_lst	*ft_put_cmd(t_lst *list, char **arg, t_env *env)
 	{
 		if (ft_strequ(arg[i], ""))
 				i++;
-		list->arg = ft_treat_line2(arg[i], ' ', env);
+		list->arg = ft_strsplit(arg[i], ' ');
+	//	list->arg = ft_treat_line2(arg[i], ' ', env);
 		i++;
 		list = list->next;
 	}

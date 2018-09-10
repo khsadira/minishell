@@ -5,6 +5,7 @@
 # include "get_next_line.h"
 # include <unistd.h>
 # include <signal.h>
+
 typedef struct	s_lst
 {
 	char	*path;
@@ -22,6 +23,7 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
+t_lst	*ft_rework_arg(t_lst *list, t_env *env);
 t_env	*ft_setenv_char(char *name, t_env *env);
 char	*ft_search_env(char *str, t_env *env);
 t_env	*ft_setenv(t_lst *list, t_env *l_env);

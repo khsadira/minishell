@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/05 17:26:50 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/10 10:04:47 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static t_lst	*ft_check_if_right(char **path_tab, char **cmd_word)
 				new_ele->built = 1;
 			list = ft_addlist(list, new_ele);
 		}
-		else if (cmd && cmd[0])
+		else if (cmd && cmd[0] && path_tab)
 		{
 			while (path_tab[i])
 			{
@@ -142,9 +142,7 @@ int 	main(int ac, char **av, char **env)
 	t_lst	*list;
 	t_lst	*head;
 	t_env	*l_env;
-	t_env	*h_env;
 	int	builtin;
-
 
 	line = NULL;
 	gnl_word = NULL;
@@ -152,7 +150,6 @@ int 	main(int ac, char **av, char **env)
 	list = NULL;
 	l_env = NULL;
 	l_env = ft_creat_env(env, l_env);
-	h_env = NULL;
  	 
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 	  ;
@@ -163,16 +160,18 @@ int 	main(int ac, char **av, char **env)
 		if (get_next_line(0, &line) > 0)
 		{
 			line = ft_ask_quote(line);
-			gnl_word = ft_treat_line(line, ';');
+			//gnl_word = ft_treat_line(line, ';');
+			gnl_word = ft_strsplit(line, ';');
 			free(line);
 		}
 		else
 		{
 			line = ft_ask_quote(line);
-			gnl_word = ft_treat_line(line, ';');
+			//gnl_word = ft_treat_line(line, ';');
+			gnl_word = ft_strsplit(line, ';');
 		}
 		path_tab = ft_get_path(l_env);
-		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env);
+		list = ft_rework_arg(ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env), l_env);
 		head = list;
 		while (list)
 		{
