@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 14:19:26 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/10 16:26:22 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static char	**ft_get_path(t_env *env)
 {
+	char	**tab;
+
 	while (env)
 	{
 		if (ft_strequ(env->name, "PATH"))
