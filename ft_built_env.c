@@ -1,17 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_built_env.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 10:05:33 by khsadira          #+#    #+#             */
+/*   Updated: 2018/09/11 10:28:35 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
-static void	ft_printenv(t_env *list)
-{
-	while (list)
-	{
-		ft_putstr(list->name);
-		ft_putchar('=');
-		ft_putendl(list->arg);
-		list = list->next;
-	}
-}
-
-static	t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
+static t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 {
 	t_env	*h_env;
 	t_env	*tmp;
@@ -33,7 +34,7 @@ static	t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 	return (h_env);
 }
 
-t_env	*ft_setenv_char(char *name, t_env *env)
+t_env			*ft_setenv_char(char *name, t_env *env)
 {
 	t_env	*h_env;
 
@@ -54,7 +55,7 @@ t_env	*ft_setenv_char(char *name, t_env *env)
 	return (h_env);
 }
 
-static	t_env *ft_setenv_nullarg(t_lst *list, t_env *env)
+static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 {
 	t_env	*h_env;
 
@@ -74,15 +75,20 @@ static	t_env *ft_setenv_nullarg(t_lst *list, t_env *env)
 	return (env);
 }
 
-t_env	*ft_setenv(t_lst *list, t_env *l_env)
+t_env			*ft_setenv(t_lst *list, t_env *l_env)
 {
 	t_env	*h_env;
 
 	h_env = l_env;
 	if (!list->arg[1])
+	{
+		ft_printenv(h_env);
 		return (h_env);
-	if (!list->arg[2])
+	}
+	else if (!list->arg[2])
 		return (ft_setenv_nullarg(list, l_env));
+	else if (ft_check_env_error(list))
+		return (h_env);
 	while (l_env)
 	{
 		if (ft_strequ(l_env->name, list->arg[1]))
@@ -98,7 +104,8 @@ t_env	*ft_setenv(t_lst *list, t_env *l_env)
 	return (h_env);
 }
 
-t_env	*ft_built_env(t_lst *list, t_env *l_env, int builtin, char **env)
+t_env			*ft_built_env(t_lst *list, t_env *l_env,
+								int builtin, char **env)
 {
 	if (builtin == 1)
 		ft_printenv(l_env);

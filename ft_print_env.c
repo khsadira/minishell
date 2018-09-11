@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_built_echo.c                                    :+:      :+:    :+:   */
+/*   ft_print_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/11 10:03:15 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/11 10:03:19 by khsadira         ###   ########.fr       */
+/*   Created: 2018/09/11 10:06:41 by khsadira          #+#    #+#             */
+/*   Updated: 2018/09/11 10:07:25 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-int	ft_built_echo(t_lst *list, t_env *env)
+void	ft_printenv(t_env *list)
 {
-	int		i;
-	int		n;
-	t_env	*h_env;
-
-	h_env = env;
-	n = 0;
-	if (list->arg[1] && ft_strequ(list->arg[1], "-n"))
+	while (list)
 	{
-		n = 1;
-		i = 2;
+		ft_putstr(list->name);
+		ft_putchar('=');
+		ft_putendl(list->arg);
+		list = list->next;
 	}
-	else
-		i = 1;
-	while (list->arg[i])
-		ft_putstr(list->arg[i++]);
-	if (!n)
-		ft_putchar(10);
-	return (1);
 }
