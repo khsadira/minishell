@@ -14,8 +14,6 @@
 
 static char	**ft_get_path(t_env *env)
 {
-	char	**tab;
-
 	while (env)
 	{
 		if (ft_strequ(env->name, "PATH"))
@@ -50,27 +48,31 @@ int 	main(int ac, char **av, char **env)
 		else
 			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
 		path_tab = ft_get_path(l_env);
-		list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env);
-		head = list;
-		while (list)
+		//list = ft_put_cmd(ft_check_if_right(path_tab, gnl_word), gnl_word, l_env);
+		if (path_tab)
 		{
-			if (list->built == 1)
+			list = ft_put_cmd(ft_check_path(path_tab, gnl_word, 0, 0), gnl_word, l_env);
+			head = list;
+			while (list)
 			{
-				if ((builtin = ft_check_built(list->cmd)) == 0)
-					ft_freeall_exit(path_tab, gnl_word, head, l_env);
-				else if (builtin >= 1 && builtin <= 3)
-					l_env = ft_built_env(list, l_env, builtin, env);
-				else if (builtin == 4)
-					ft_built_echo(list, l_env);
-				else if (builtin == 5)
-					ft_built_cd(list, &l_env);	
+				if (list->built == 1)
+				{
+					if ((builtin = ft_check_built(list->cmd)) == 0)
+						ft_freeall_exit(path_tab, gnl_word, head, l_env);
+					else if (builtin >= 1 && builtin <= 3)
+						l_env = ft_built_env(list, l_env, builtin, env);
+					else if (builtin == 4)
+						ft_built_echo(list, l_env);
+					else if (builtin == 5)
+						ft_built_cd(list, &l_env);
+				}
+				else
+					ft_exec(list, env);
+				list = list->next;
 			}
-			else
-				ft_exec(list, env);
-			list = list->next;
+			ft_freedstr(path_tab);
+			ft_freelst(head);
 		}
-		ft_freedstr(path_tab);
 		ft_freedstr(gnl_word);
-		ft_freelst(head);
 	}
 }

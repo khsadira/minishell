@@ -17,6 +17,8 @@ void	ft_freedstr(char **arg)
 	int	i;
 
 	i = 0;
+	if (!arg)
+		return ;
 	while (arg[i])
 	{
 		free(arg[i]);
