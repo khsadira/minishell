@@ -23,9 +23,10 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
+void	ft_compare_list(t_lst *l1, t_lst *l2);
 void	ft_signal(void);
 void	ft_exec(t_lst *list, char **env);
-void	ft_freeall_exit(char **ret, char **gnl, t_lst *list, t_env *env);
+void	ft_freeall_exit(t_lst *list, t_env *env);
 char	**ft_rework_cmd(char **arg, t_env *env);
 t_env	*ft_setenv_char(char *name, t_env *env);
 char	*ft_search_env(char *str, t_env *env);

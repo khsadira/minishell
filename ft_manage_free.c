@@ -57,10 +57,8 @@ void	ft_freeenv(t_env *list)
 	}
 }
 
-void	ft_freeall_exit(char **ret, char **gnl, t_lst *list, t_env *env)
+void	ft_freeall_exit(t_lst *list, t_env *env)
 {
-	ft_freedstr(ret);
-	ft_freedstr(gnl);
 	ft_freelst(list);
 	ft_freeenv(env);
 	exit(1);

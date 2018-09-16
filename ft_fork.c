@@ -24,7 +24,7 @@ static pid_t		ft_fork(char *path, char **arg, char **env)
 	}
 	else if (pid < 0)
 	{
-		ft_putendl("fork error.");
+		ft_putendl("Fork failed to create a new process.");
 		return (-1);
 	}
 	wait(&pid);
