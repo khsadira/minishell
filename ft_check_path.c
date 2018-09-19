@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:29:36 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 15:07:33 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 17:04:33 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_lst	*ft_check_cmd(char **path_tab, t_lst *list, char *cmd)
 
 static t_lst	*ft_path_cmd(t_lst *list, char *cmd, char *cmd_word)
 {
-	if ((access(cmd, X_OK)) == 0)
+	if (access(cmd, R_OK || X_OK) == 0)
 	{
 		list = ft_up_list(NULL, cmd, list, 2);
 		return (list);
