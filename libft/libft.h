@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 15:30:57 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 11:49:04 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:33:16 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LIBFT_H
 # include <string.h>
 
-int			ft_strdlen(char **arg);
-int			ft_nblen(int nb);
+int				ft_strdlen(char **arg);
+int				ft_nblen(int nb);
 size_t			ft_strlen(const char *s);
 char			*ft_strdup(const char *s1);
 int				ft_isalpha(int c);

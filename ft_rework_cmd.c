@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 12:48:47 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 13:39:04 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:19:42 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,22 @@ static char	*ft_put_arg_dol(char *arg, int i, t_env *env)
 	return (tmp);
 }
 
+static char	**ft_trimarg(char **str)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (str[i])
+	{
+		tmp = str[i];
+		str[i] = ft_strtrim(str[i]);
+		free(tmp);
+		i++;
+	}
+	return (str);
+}
+
 char		**ft_rework_cmd(char **arg, t_env *env)
 {
 	int		i;
@@ -74,5 +90,6 @@ char		**ft_rework_cmd(char **arg, t_env *env)
 		}
 		i++;
 	}
+	arg = ft_trimarg(arg);
 	return (arg);
 }
