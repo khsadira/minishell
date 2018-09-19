@@ -6,13 +6,13 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:04:26 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 14:09:03 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:02:12 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-static pid_t		ft_fork(char *path, char **arg, char **env)
+static int		ft_fork(char *path, char **arg, char **env)
 {
 	pid_t	pid;
 
@@ -33,7 +33,7 @@ static pid_t		ft_fork(char *path, char **arg, char **env)
 
 void		ft_exec(t_lst *list, char **env)
 {
-	int	pid_value;
+	int		pid_value;
 
 	pid_value = ft_fork(list->path, list->arg, env);
 	if (pid_value != 0 && pid_value != -1 && pid_value != -2)

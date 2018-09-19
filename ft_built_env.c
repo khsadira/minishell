@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:05:33 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/11 10:28:35 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 14:58:27 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ t_env			*ft_setenv(t_lst *list, t_env *l_env)
 		ft_printenv(h_env);
 		return (h_env);
 	}
-	else if (!list->arg[2])
-		return (ft_setenv_nullarg(list, l_env));
 	else if (ft_check_env_error(list))
 		return (h_env);
+	else if (!list->arg[2])
+		return (ft_setenv_nullarg(list, l_env));
 	while (l_env)
 	{
 		if (ft_strequ(l_env->name, list->arg[1]))

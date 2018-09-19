@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:29:36 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 12:32:08 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:07:33 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,17 @@ static t_lst	*ft_check_cmd(char **path_tab, t_lst *list, char *cmd)
 		free(path);
 		i++;
 	}
-	if (com == 0)
-		return (NULL);
 	return (list);
 }
 
 static t_lst	*ft_path_cmd(t_lst *list, char *cmd, char *cmd_word)
 {
-	if (access(cmd, R_OK || X_OK) == 0)
+	if ((access(cmd, X_OK)) == 0)
 	{
 		list = ft_up_list(NULL, cmd, list, 2);
 		return (list);
 	}
-	else
-		return (NULL);
+	return (NULL);
 }
 
 t_lst			*ft_check_path(char **path_tab, char *cmd_word, int i, int j)
@@ -104,7 +101,7 @@ t_lst			*ft_check_path(char **path_tab, char *cmd_word, int i, int j)
 	if (ft_strlen(cmd_word) == 0)
 		return (NULL);
 	cmd = ft_to_command(cmd_word);
-	if (ft_strnequ(cmd, "./", 2) || ft_strnequ(cmd, "/", 1))
+	if (ft_strnequ(cmd, "./", 2) || ft_strnequ(cmd, "/", 1) || ft_strnequ(cmd, "..", 2))
 		list = ft_path_cmd(list, cmd, cmd_word);
 	else if (ft_check_built(cmd) >= 0)
 		list = ft_up_list(NULL, cmd, list, 1);
