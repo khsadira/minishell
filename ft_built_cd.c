@@ -12,18 +12,28 @@
 
 #include "ft_minishell.h"
 
-static int		ft_print_cd_error(int nb_error, char *rep)
+static int	ft_check_opts(char **arg)
 {
-	if (nb_error == 1)
-		ft_putstr_fd("cd : string not in pwd: ", 2);
-	else if (nb_error == 2)
-		ft_putstr_fd("cd : no such file or directory: ", 2);
-	else if (nb_error == 3)
-		ft_putstr_fd("cd: OLDPWD not set", 2);
-	if (rep)
-		ft_putstr_fd(rep, 2);
-	ft_putchar_fd(10, 2);
-	return (0);
+	int	i;
+	int	opts;
+	int	j;
+
+	opts = 0;
+	i = 1;
+	while (arg[i])
+	{
+		if (arg[i][0] != '-' || ft_strequ("--", arg[i]))
+			return (opts);
+		j = 1;
+		while (arg[i][j])
+		{
+			if (arg[i][j] == 'P')
+				opts = 1;
+			j++;
+		}
+		i++;
+	}
+	return (opts);
 }
 
 static t_lst	*ft_creat_arg(t_lst *list, t_env *env)
@@ -42,27 +52,78 @@ static t_lst	*ft_creat_arg(t_lst *list, t_env *env)
 	return (list);
 }
 
+static char	*ft_lnk(char *path)
+{
+	char	link[255];
+	int	rl;
+	char	*ret;
+	char	*tmp;
+
+	rl = 0;
+	if ((rl = readlink(path, link, 255)))
+		link[rl] = '\0';
+	tmp = ft_strdup(link);
+	ret = ft_strdup("/");
+	ret = ft_strfjoin(&ret, tmp);
+	free(tmp);
+	return (ret);
+}
+
+static char	*ft_creat_cd_lnk(char *str, t_env *env)
+{
+	char		*ret;
+	struct stat	buf;
+	char		*path;
+
+	path = NULL;
+	if (str[0] != '/')
+	{
+		path = ft_strdup(ft_search_env("PWD", env));
+		path = ft_strfjoin(&path, str);
+	}
+	else
+		path = ft_strdup(str);
+	if (lstat(path, &buf))
+	{
+		free(path);
+		return (str);
+	}
+	if (!S_ISLNK(buf.st_mode))
+		return (str);
+	ret = ft_lnk(path);
+	free(str);
+	free(path);
+	return (ret);
+}
+
 int				ft_built_cd(t_lst *list, t_env **env)
 {
 	char	*dir;
+	int	i;
+	int	opts;
 
-	if (!list->arg[1])
-		list = ft_creat_arg(list, *env);
-	else if (list->arg[2])
-		return (ft_print_cd_error(1, list->arg[1]));
-	else if (ft_strequ(list->arg[1], "-"))
+	if ((i = ft_check_cd_error(list->arg)) == -1)
+		return (1);
+	else if (ft_strequ(list->arg[i], "-"))
 	{
 		if (!(dir = ft_search_env("OLDPWD", *env)))
 			return (ft_print_cd_error(3, NULL));
-		free(list->arg[1]);
-		list->arg[1] = ft_strdup(dir);
-		ft_putendl(list->arg[1]);
+		free(list->arg[i]);
+		list->arg[i] = ft_strdup(dir);
+		ft_putendl(list->arg[i]);
 	}
-	if (access(list->arg[1], R_OK) == 0)
+	opts = ft_check_opts(list->arg);
+	if (list->arg[i] == NULL && (i = 1))
+		list = ft_creat_arg(list, *env);
+	if (opts == 1)
+		list->arg[i] = ft_creat_cd_lnk(list->arg[i], *env);
+	if (access(list->arg[i], R_OK) == 0)
 	{
 		ft_setenv_char("OLDPWD", *env);
-		chdir(list->arg[1]);
+		printf("%s\n", list->arg[i]);
+		chdir(list->arg[i]);
+		ft_setenv_char("PWD", *env);
 		return (1);
 	}
-	return (ft_print_cd_error(2, list->arg[1]));
+	return (ft_print_cd_error(2, list->arg[i]));
 }
