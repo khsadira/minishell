@@ -8,6 +8,8 @@ int		ft_print_cd_error(int nb_error, char *rep)
 		ft_putstr_fd("cd : no such file or directory: ", 2);
 	else if (nb_error == 3)
 		ft_putstr_fd("cd: OLDPWD not set", 2);
+	else if (nb_error == 4)
+		ft_putstr_fd("cd: not a directory: ", 2);
 	if (rep)
 		ft_putstr_fd(rep, 2);
 	ft_putchar_fd(10, 2);
@@ -48,7 +50,7 @@ int		ft_check_cd_error(char **arg)
 	while (arg[i])
 	{
 		if ((stock = ft_check_cd_pars(arg[i])))
-			break;
+			break ;
 		i++;
 	}
 	if (stock == 2)

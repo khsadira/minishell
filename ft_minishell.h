@@ -24,6 +24,10 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
+char		**ft_get_path(t_env *env);
+void			ft_built_env(t_lst *list, t_env *l_env, int i);
+t_env		*ft_unsetenv(t_lst *list, t_env *l_env);
+char		*ft_creat_cd_lnk(char *str, t_env *env);
 int	ft_check_cd_error(char **arg);
 int	ft_print_cd_error(int nb_error, char *rep);
 char	*ft_creat_path(char *path_tab, char *cmd);
@@ -39,7 +43,7 @@ char	*ft_search_env(char *str, t_env *env);
 t_env	*ft_setenv(t_lst *list, t_env *l_env);
 void	ft_freeenv(t_env *list);
 t_env	*ft_creat_env(char **env, t_env *l_env);
-t_env	*ft_built_env(t_lst *list, t_env *l_env, int builtin, char **env);
+t_env	*ft_check_env(t_lst *list, t_env *l_env, int builtin, char **env);
 int	ft_built_echo(t_lst *list, t_env *env);
 int	ft_built_cd(t_lst *list, t_env **env);
 t_env	*ft_addenv(t_env *list, t_env *new_ele);
@@ -55,5 +59,4 @@ void	ft_free_env(char **env);
 void	ft_printenv(t_env *list);
 int		ft_check_env_error(t_lst *list);
 t_lst	*ft_check_path(char **path_tab, char *cmd_word, int i, int j);
-//t_lst	*ft_check_path(char **path_tab, char **cmd_word, int i, int j);
 #endif

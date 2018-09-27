@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addfct.c                                        :+:      :+:    :+:   */
+/*   ft_built_unsetenv.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/19 12:29:31 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 12:31:27 by khsadira         ###   ########.fr       */
+/*   Created: 2018/09/27 15:18:42 by khsadira          #+#    #+#             */
+/*   Updated: 2018/09/27 15:20:42 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-char	*ft_creat_path(char *path, char *cmd)
+t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 {
-	char	*ret;
+	t_env	*h_env;
+	t_env	*tmp;
 
-	ret = NULL;
-	ret = ft_strjoin(path, "/");
-	ret = ft_strfjoin(&ret, cmd);
-	return (ret);
-}
-
-int		ft_acces(char *cmd, char *path)
-{
-	if (!ft_strequ(cmd, ".") &&
-		!ft_strequ(cmd, "..") &&
-		access(path, R_OK || X_OK) == 0)
-		return (1);
-	return (0);
+	if (ft_strequ(list->arg[1], "HOME"))
+		return (l_env);
+	h_env = l_env;
+	while (l_env)
+	{
+		if (ft_strequ(l_env->name, list->arg[1]))
+		{
+			tmp->next = l_env->next;
+			l_env->next = NULL;
+			ft_freeenv(l_env);
+		}
+		tmp = l_env;
+		l_env = l_env->next;
+	}
+	return (h_env);
 }
