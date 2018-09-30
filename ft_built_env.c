@@ -35,16 +35,26 @@ static  t_env	*ft_dupenv(t_env *env)
 
 }
 
-void			ft_built_env(t_lst *list, t_env *l_env, int i)
+void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 {
 	t_env	*env;
 
-	env = ft_dupenv(l_env);
+	if (a)
+		env = l_env;
+	else
+		env = ft_dupenv(l_env);
 	while (list->arg[i])
 	{
 		if (ft_strequ(list->arg[i], "env"))
-			return (ft_built_env(list, l_env, i + 1));
+			return (ft_built_env(list, env, i + 1, 1));
+		else if (ft_strequ(list->arg[i], "-i"))
+		{
+			ft_freeenv(env);
+			return (ft_built_env(list, NULL, i + 1, 1));
+		}
 		i++;
 	}
 	ft_printenv(env);
+	if (env)
+		ft_freeenv(env);
 }

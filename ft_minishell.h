@@ -25,7 +25,7 @@ typedef struct	s_env
 }		t_env;
 
 char		**ft_get_path(t_env *env);
-void			ft_built_env(t_lst *list, t_env *l_env, int i);
+void			ft_built_env(t_lst *list, t_env *l_env, int i, int a);
 t_env		*ft_unsetenv(t_lst *list, t_env *l_env);
 char		*ft_creat_cd_lnk(char *str, t_env *env);
 int	ft_check_cd_error(char **arg);
