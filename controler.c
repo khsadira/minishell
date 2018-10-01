@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 15:37:41 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:33:30 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@ char		**ft_get_path(t_env *env)
 	return (NULL);
 }
 
-int	 	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
+static void	ft_call_builtin(t_lst *list, t_env *l_env, int builtin)
+{
+	if (builtin == 4)
+		ft_built_echo(list, l_env);
+	else if (builtin == 5)
+		ft_built_cd(list, &l_env);
+}
+
+int			ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 {
 	int		builtin;
 	t_lst	*list;
@@ -40,10 +48,8 @@ int	 	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 				ft_freeall_exit(path_tab, list, gnl_word, env);
 			else if (builtin >= 1 && builtin <= 3)
 				l_env = ft_check_env(list, l_env, builtin);
-			else if (builtin == 4)
-				ft_built_echo(list, l_env);
-			else if (builtin == 5)
-				ft_built_cd(list, &l_env);
+			else
+				ft_call_builtin(list, l_env, builtin);
 		}
 		else if (list)
 			ft_exec(list, env);

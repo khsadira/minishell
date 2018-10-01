@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:26:00 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 15:53:32 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:08:41 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_env		*ft_check_env(t_lst *list, t_env *l_env, int builtin)
 
 	if (builtin == 1)
 	{
-		a = ft_check_env_err(list->arg);
+		a = ft_check_env_err(list->arg, 0, 0);
 		ft_built_env(list, ft_dupenv(l_env), 0, a);
 	}
 	else if (builtin == 2)
@@ -28,7 +28,7 @@ t_env		*ft_check_env(t_lst *list, t_env *l_env, int builtin)
 	return (l_env);
 }
 
-int	ft_check_built(char	*cmd)
+int			ft_check_built(char *cmd)
 {
 	if (ft_strequ(cmd, "exit"))
 		return (0);

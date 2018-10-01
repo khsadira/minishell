@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:13:02 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/10 14:15:34 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:38:25 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	sig_handler(int signo)
 		return ;
 }
 
-void	ft_signal(void)
+void		ft_signal(void)
 {
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		return ;

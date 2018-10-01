@@ -6,13 +6,13 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:05:33 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 15:59:35 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:00:08 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
- t_env		*ft_dupenv(t_env *env)
+t_env			*ft_dupenv(t_env *env)
 {
 	t_env	*new;
 	t_env	*head;

@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 15:30:57 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 12:33:16 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:12:25 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
-int			ft_strichr(char *str, char c);
+int				ft_strichr(char *str, char c);
 int				ft_strdlen(char **arg);
 int				ft_nblen(int nb);
 size_t			ft_strlen(const char *s);
@@ -36,7 +36,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t size);
 int				ft_atoi(const char *str);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack,
-				const char *needle, size_t len);
+							const char *needle, size_t len);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 void			*ft_memset(void *b, int c, size_t len);

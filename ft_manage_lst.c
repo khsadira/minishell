@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_manage_lst.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/01 15:38:42 by khsadira          #+#    #+#             */
+/*   Updated: 2018/10/01 15:39:00 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
 t_lst	*ft_addlist(t_lst *list, t_lst *new_ele)
@@ -42,8 +54,6 @@ t_env	*ft_addenv(t_env *list, t_env *new_ele)
 		list = list->next;
 	list->next = new_ele;
 	return (head);
-
-
 }
 
 t_env	*ft_newenv(char *name, char *arg)

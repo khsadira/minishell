@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:18:42 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 15:20:42 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:16:29 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_env	*ft_unsetenv(t_lst *list, t_env *l_env)
 	t_env	*h_env;
 	t_env	*tmp;
 
-	if (ft_strequ(list->arg[1], "HOME"))
-		return (l_env);
 	h_env = l_env;
 	while (l_env)
 	{

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_to_tab.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/01 15:40:28 by khsadira          #+#    #+#             */
+/*   Updated: 2018/10/01 15:41:55 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
-static	int	ft_env_len(t_env *env)
+static int	ft_env_len(t_env *env)
 {
 	int	len;
 
@@ -16,9 +28,9 @@ static	int	ft_env_len(t_env *env)
 static char	*ft_to_env(char *name, char *arg)
 {
 	char	*ret;
-	int	i;
-	int	j;
-	int	len;
+	int		i;
+	int		j;
+	int		len;
 
 	ret = NULL;
 	len = ft_strlen(name) + ft_strlen(arg) + 1;
@@ -35,11 +47,11 @@ static char	*ft_to_env(char *name, char *arg)
 	return (ret);
 }
 
-char	**ft_list_to_env(t_env *env)
+char		**ft_list_to_env(t_env *env)
 {
 	char	**ret;
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 
 	i = 0;
 	if (!(len = ft_env_len(env)))

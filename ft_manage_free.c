@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:48:59 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 11:48:52 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:39:20 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_freeenv(t_env *list)
 	}
 }
 
-void	ft_freeall_exit(char **path_tab, t_lst *list, char **gnl_word, char **env)
+void	ft_freeall_exit(char **path_tab, t_lst *list,
+						char **gnl_word, char **env)
 {
 	if (path_tab)
 		ft_freedstr(path_tab);

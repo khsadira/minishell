@@ -6,13 +6,13 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 09:59:06 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 14:26:49 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:08:18 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-static int	ft_check_opts(char **arg)
+static int		ft_check_opts(char **arg)
 {
 	int	i;
 	int	opts;

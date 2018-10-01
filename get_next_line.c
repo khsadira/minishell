@@ -6,13 +6,13 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 11:29:42 by khsadira          #+#    #+#             */
-/*   Updated: 2018/05/07 15:03:32 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:34:51 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strfjoin(char **over, char *buff)
+char			*ft_strfjoin(char **over, char *buff)
 {
 	int		over_s;
 	int		buff_s;
@@ -56,7 +56,7 @@ static int		fill_line(char **over, char **line)
 	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static char	*over[15000];
 	char		buff[BUFF_SIZE + 1];

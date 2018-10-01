@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_cd_error.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/01 16:04:40 by khsadira          #+#    #+#             */
+/*   Updated: 2018/10/01 16:07:51 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
-int		ft_print_cd_error(int nb_error, char *rep)
+int			ft_print_cd_error(int nb_error, char *rep)
 {
 	if (nb_error == 1)
 		ft_putstr_fd("cd : string not in pwd: ", 2);
@@ -19,11 +31,11 @@ int		ft_print_cd_error(int nb_error, char *rep)
 static int	ft_check_cd_pars(char *str)
 {
 	int	i;
-	
+
 	if (ft_strequ("--", str))
-			return (2);
+		return (2);
 	if (ft_strequ("-", str))
-			return (1);
+		return (1);
 	if (str[0] != '-')
 		return (1);
 	i = 1;
@@ -36,7 +48,7 @@ static int	ft_check_cd_pars(char *str)
 	return (0);
 }
 
-int		ft_check_cd_error(char **arg)
+int			ft_check_cd_error(char **arg)
 {
 	int	i;
 	int	len;

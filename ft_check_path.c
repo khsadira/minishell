@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:29:36 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 17:04:33 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:38:05 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ t_lst			*ft_check_path(char **path_tab, char *cmd_word)
 	if (ft_strlen(cmd_word) == 0)
 		return (NULL);
 	cmd = ft_to_command(cmd_word);
-	if (ft_strnequ(cmd, "./", 2) || ft_strnequ(cmd, "/", 1) || ft_strnequ(cmd, "..", 2))
+	if (ft_strnequ(cmd, "./", 2) || ft_strnequ(cmd, "/", 1) ||
+									ft_strnequ(cmd, "..", 2))
 		list = ft_path_cmd(list, cmd);
 	else if (ft_check_built(cmd) >= 0)
 		list = ft_up_list(NULL, cmd, list, 1);

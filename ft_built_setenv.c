@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:00:41 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 15:17:38 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:16:08 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_env			*ft_setenv_c(char *name, char *arg, t_env *env)
 	env = ft_newenv(name, arg);
 	h_env = ft_addenv(h_env, env);
 	return (h_env);
-
 }
 
 static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
@@ -103,4 +102,3 @@ t_env			*ft_setenv(t_lst *list, t_env *l_env)
 	h_env = ft_addenv(h_env, l_env);
 	return (h_env);
 }
-

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_manage_env.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/01 15:39:33 by khsadira          #+#    #+#             */
+/*   Updated: 2018/10/01 15:40:15 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
 static	char	*ft_return_arg(char *str)
 {
 	char	*arg;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (str[i] && str[i] != '=')
@@ -16,7 +28,7 @@ static	char	*ft_return_arg(char *str)
 static	char	*ft_return_name(char *str)
 {
 	char	*name;
-	int	j;
+	int		j;
 
 	j = 0;
 	while (str[j] && str[j] != '=')
@@ -25,7 +37,7 @@ static	char	*ft_return_name(char *str)
 	return (name);
 }
 
-char		*ft_search_env(char *str, t_env *env)
+char			*ft_search_env(char *str, t_env *env)
 {
 	while (env)
 	{
@@ -35,10 +47,12 @@ char		*ft_search_env(char *str, t_env *env)
 	}
 	return (NULL);
 }
-static char	*ft_push_i(char *arg)
+
+static char		*ft_push_i(char *arg)
 {
-	int	stock;
+	int		stock;
 	char	*tmp;
+
 	stock = ft_atoi(arg);
 	stock++;
 	tmp = arg;
@@ -47,11 +61,11 @@ static char	*ft_push_i(char *arg)
 	return (arg);
 }
 
-t_env	*ft_creat_env(char **env, t_env *l_env)
+t_env			*ft_creat_env(char **env, t_env *l_env)
 {
 	char	*name;
 	char	*arg;
-	int	i;
+	int		i;
 	t_env	*new_ele;
 
 	l_env = NULL;

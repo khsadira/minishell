@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 13:52:52 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/27 14:44:36 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:47:32 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static char	*ft_lnk(char *path)
 	ret = ft_strfjoin(&ret, tmp);
 	free(tmp);
 	return (ret);
+}
+
+static void	ft_free_into_cd(char **s1, char **s2)
+{
+	free(*s1);
+	free(*s2);
 }
 
 char		*ft_creat_cd_lnk(char *str, t_env *env)
@@ -54,7 +60,6 @@ char		*ft_creat_cd_lnk(char *str, t_env *env)
 		return (str);
 	}
 	ret = ft_lnk(path);
-	free(str);
-	free(path);
+	ft_free_into_cd(&str, &path);
 	return (ret);
 }

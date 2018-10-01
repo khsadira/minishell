@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:04:26 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 15:02:12 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/01 15:48:02 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		ft_fork(char *path, char **arg, char **env)
 	return (1);
 }
 
-void		ft_exec(t_lst *list, char **env)
+void			ft_exec(t_lst *list, char **env)
 {
 	int		pid_value;
 
