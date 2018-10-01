@@ -74,7 +74,6 @@ int				ft_built_cd(t_lst *list, t_env **env)
 	if (access(list->arg[i], R_OK) == 0)
 	{
 		ft_setenv_char("OLDPWD", *env);
-		printf("%s\n", list->arg[i]);
 		chdir(list->arg[i]);
 		ft_setenv_char("PWD", *env);
 		return (1);

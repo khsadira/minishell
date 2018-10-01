@@ -16,7 +16,7 @@ CC		=	gcc
 
 CFLAGS	=	#-Wall -Wextra -Werror
 
-SRC		=	ft_built_unsetenv.c ft_built_setenv.c ft_creat_cd.c ft_check_cd_error.c ft_addfct.c ft_check_path.c ft_check_env_error.c ft_print_env.c ft_signal.c ft_fork.c ft_rework_cmd.c ft_built_echo.c ft_built_cd.c ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
+SRC		=	ft_list_to_tab.c ft_check_env_err.c ft_built_unsetenv.c ft_built_setenv.c ft_creat_cd.c ft_check_cd_error.c ft_addfct.c ft_check_path.c ft_check_env_error.c ft_print_env.c ft_signal.c ft_fork.c ft_rework_cmd.c ft_built_echo.c ft_built_cd.c ft_manage_env.c ft_built_env.c ft_manage_free.c ft_builtin.c ft_manage_cmd.c ft_manage_lst.c controler.c get_next_line.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -57,22 +57,26 @@ void	ft_freeenv(t_env *list)
 	}
 }
 
-void	ft_freeall_exit(char **path_tab, t_lst *list, char **gnl_word)
+void	ft_freeall_exit(char **path_tab, t_lst *list, char **gnl_word, char **env)
 {
 	if (path_tab)
 		ft_freedstr(path_tab);
 	ft_freelst(list);
+	if (env)
+		ft_freedstr(env);
 	if (gnl_word)
 		ft_freedstr(gnl_word);
 	exit(1);
 }
 
-void	ft_freeall(char **path_tab, t_lst *list)
+void	ft_freeall(char **path_tab, t_lst *list, char **env)
 {
 	int		i;
 
 	i = 0;
 	if (path_tab)
 		ft_freedstr(path_tab);
+	if (env)
+		ft_freedstr(env);
 	ft_freelst(list);
 }

@@ -36,6 +36,17 @@ char		*ft_search_env(char *str, t_env *env)
 	}
 	return (NULL);
 }
+static char	*ft_push_i(char *arg)
+{
+	int	stock;
+	char	*tmp;
+	stock = ft_atoi(arg);
+	stock++;
+	tmp = arg;
+	arg = ft_itoa(stock);
+	free(tmp);
+	return (arg);
+}
 
 t_env	*ft_creat_env(char **env, t_env *l_env)
 {
@@ -50,6 +61,8 @@ t_env	*ft_creat_env(char **env, t_env *l_env)
 	{
 		name = ft_return_name(env[i]);
 		arg = ft_return_arg(env[i]);
+		if (ft_strequ(name, "SHLVL"))
+			arg = ft_push_i(arg);
 		new_ele = ft_newenv(name, arg);
 		l_env = ft_addenv(l_env, new_ele);
 		i++;

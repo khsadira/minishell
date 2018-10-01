@@ -33,6 +33,28 @@ t_env			*ft_setenv_char(char *name, t_env *env)
 	return (h_env);
 }
 
+t_env			*ft_setenv_c(char *name, char *arg, t_env *env)
+{
+	t_env	*h_env;
+
+	h_env = env;
+	while (env)
+	{
+		if (ft_strequ(env->name, name) == 1)
+		{
+			if (env->arg)
+				free(env->arg);
+			env->arg = arg;
+			return (h_env);
+		}
+		env = env->next;
+	}
+	env = ft_newenv(name, arg);
+	h_env = ft_addenv(h_env, env);
+	return (h_env);
+
+}
+
 static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 {
 	t_env	*h_env;

@@ -15,8 +15,13 @@
 t_env		*ft_check_env(t_lst *list, t_env *l_env,
 							int builtin, char **env)
 {
+	int	a;
+
 	if (builtin == 1)
-		ft_built_env(list, l_env, 0, 0);
+	{
+		a = ft_check_env_err(list->arg);
+		ft_built_env(list, ft_dupenv(l_env), 0, a);
+	}
 	else if (builtin == 2)
 		ft_setenv(list, l_env);
 	else if (builtin == 3)

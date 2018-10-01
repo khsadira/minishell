@@ -23,7 +23,7 @@ char		**ft_get_path(t_env *env)
 	return (NULL);
 }
 
-static int	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
+int	 	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 {
 	int		builtin;
 	t_lst	*list;
@@ -31,12 +31,13 @@ static int	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 
 	while (gnl_word[i])
 	{
+		env = ft_list_to_env(l_env);
 		path_tab = ft_get_path(l_env);
 		list = ft_check_path(path_tab, gnl_word[i], 0, 0);
 		if (list && list->built == 1)
 		{
 			if ((builtin = ft_check_built(list->cmd)) == 0)
-				ft_freeall_exit(path_tab, list, gnl_word);
+				ft_freeall_exit(path_tab, list, gnl_word, env);
 			else if (builtin >= 1 && builtin <= 3)
 				l_env = ft_check_env(list, l_env, builtin, env);
 			else if (builtin == 4)
@@ -46,7 +47,7 @@ static int	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 		}
 		else if (list)
 			ft_exec(list, env);
-		ft_freeall(path_tab, list);
+		ft_freeall(path_tab, list, env);
 		i++;
 	}
 	return (0);
@@ -70,7 +71,7 @@ int			main(int ac, char **av, char **env)
 		}
 		else
 			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
-		ft_start_prog(gnl_word, env, l_env, 0);
+		ft_start_prog(gnl_word, NULL, l_env, 0);
 		ft_freedstr(gnl_word);
 	}
 }

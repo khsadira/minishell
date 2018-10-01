@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
+int			ft_strichr(char *str, char c);
 int				ft_strdlen(char **arg);
 int				ft_nblen(int nb);
 size_t			ft_strlen(const char *s);

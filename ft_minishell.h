@@ -24,6 +24,11 @@ typedef struct	s_env
 	struct s_env	*next;
 }		t_env;
 
+int		ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i);
+char		**ft_list_to_env(t_env *env);
+int		ft_check_env_err(char **arg);
+t_env		*ft_dupenv(t_env *env);
+t_env		*ft_setenv_c(char *name, char *arg, t_env *env);
 char		**ft_get_path(t_env *env);
 void			ft_built_env(t_lst *list, t_env *l_env, int i, int a);
 t_env		*ft_unsetenv(t_lst *list, t_env *l_env);
@@ -35,8 +40,8 @@ int		ft_acces(char *cmd, char *path);
 void	ft_compare_list(t_lst *l1, t_lst *l2);
 void	ft_signal(void);
 void	ft_exec(t_lst *list, char **env);
-void	ft_freeall(char **path_tab, t_lst *list);
-void	ft_freeall_exit(char **path_tab, t_lst *list, char **gnl_word);
+void	ft_freeall(char **path_tab, t_lst *list, char **env);
+void	ft_freeall_exit(char **path_tab, t_lst *list, char **gnl_word, char **env);
 char	**ft_rework_cmd(char **arg, t_env *env);
 t_env	*ft_setenv_char(char *name, t_env *env);
 char	*ft_search_env(char *str, t_env *env);
