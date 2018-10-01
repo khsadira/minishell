@@ -13,26 +13,6 @@ static	int	ft_env_len(t_env *env)
 	return (len);
 }
 
-static void	ft_compare(t_env *env, char **ret)
-{
-	int	i;
-	int	len;
-	char	*name;
-	char	*arg;
-
-	i = 0;
-	while (ret[i])
-	{
-		len = ft_strlen(ret[i]);
-		name = ft_strsub(ret[i], 0, ft_strichr(ret[i], '='));
-		arg = ret[i] + ft_strichr(ret[i], '=') + 1;
-		if (!ft_strequ(name, env->name) && !ft_strequ(arg, env->arg))
-			printf("%s | %s\n", name, env->name);
-		env = env->next;
-		i++;
-	}
-}
-
 static char	*ft_to_env(char *name, char *arg)
 {
 	char	*ret;

@@ -12,8 +12,7 @@
 
 #include "ft_minishell.h"
 
-t_env		*ft_check_env(t_lst *list, t_env *l_env,
-							int builtin, char **env)
+t_env		*ft_check_env(t_lst *list, t_env *l_env, int builtin)
 {
 	int	a;
 

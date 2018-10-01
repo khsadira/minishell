@@ -4,7 +4,6 @@ static	char	*ft_return_arg(char *str)
 {
 	char	*arg;
 	int	i;
-	int	j;
 
 	i = 0;
 	while (str[i] && str[i] != '=')

@@ -33,13 +33,13 @@ int	 	ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 	{
 		env = ft_list_to_env(l_env);
 		path_tab = ft_get_path(l_env);
-		list = ft_check_path(path_tab, gnl_word[i], 0, 0);
+		list = ft_check_path(path_tab, gnl_word[i]);
 		if (list && list->built == 1)
 		{
 			if ((builtin = ft_check_built(list->cmd)) == 0)
 				ft_freeall_exit(path_tab, list, gnl_word, env);
 			else if (builtin >= 1 && builtin <= 3)
-				l_env = ft_check_env(list, l_env, builtin, env);
+				l_env = ft_check_env(list, l_env, builtin);
 			else if (builtin == 4)
 				ft_built_echo(list, l_env);
 			else if (builtin == 5)
@@ -59,6 +59,9 @@ int			main(int ac, char **av, char **env)
 	char	**gnl_word;
 	t_env	*l_env;
 
+	(void)ac;
+	av++;
+	l_env = NULL;
 	l_env = ft_creat_env(env, l_env);
 	while (1)
 	{

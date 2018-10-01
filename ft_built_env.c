@@ -36,7 +36,6 @@
 
 static char		**ft_tab_to_tabi(char **tab, int i)
 {
-	int	a;
 	char	*ret;
 	char	**ret_t;
 
