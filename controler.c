@@ -73,7 +73,7 @@ int			main(int ac, char **av, char **env)
 	l_env = ft_creat_env(env, l_env);
 	while (1)
 	{
-	//	ft_signal();
+		ft_signal();
 		ft_putstr("$>");
 		if ((ret = get_next_line(0, &line)) > 0)
 		{

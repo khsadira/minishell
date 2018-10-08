@@ -26,10 +26,8 @@ t_env			*ft_dupenv(t_env *env)
 	{
 		if (!(new = (t_env *)malloc(sizeof(*new))))
 			return (NULL);
-		if (new->name)
-			new->name = ft_strdup(tmp->name);
-		if (new->arg)
-			new->arg = ft_strdup(tmp->arg);
+		new->name = ft_strdup(tmp->name);
+		new->arg = ft_strdup(tmp->arg);
 		new->next = NULL;
 		head = ft_addenv(head, new);
 		tmp = tmp->next;
@@ -42,7 +40,7 @@ static char		**ft_tab_to_tabi(char **tab, int i)
 	char	*ret;
 	char	**ret_t;
 
-	if (!(ret_t = (char **)malloc(sizeof(char *) * 1)))
+	if (!(ret_t = (char **)malloc(sizeof(char *) * 2)))
 		return (NULL);
 	ret = ft_strdup(tab[i]);
 	i++;
@@ -88,10 +86,8 @@ void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 		}
 		else if ((c = ft_strichr(list->arg[i], '=')) != -1)
 		{
-			ft_putendl("ici3\n");
 			l_env = ft_setenv_c(ft_strsub(list->arg[i], 0, c),
 				ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c), l_env);
-			ft_putendl("ici1\n");
 			return (ft_built_env(list, l_env, i + 1, a));
 		}
 		i++;
