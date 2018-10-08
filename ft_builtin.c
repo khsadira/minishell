@@ -22,9 +22,9 @@ t_env		*ft_check_env(t_lst *list, t_env *l_env, int builtin)
 		ft_built_env(list, ft_dupenv(l_env), 0, a);
 	}
 	else if (builtin == 2)
-		ft_setenv(list, l_env);
+		l_env = ft_setenv(list, l_env);
 	else if (builtin == 3)
-		ft_unsetenv(list, l_env);
+		l_env = ft_unsetenv(list, l_env);
 	return (l_env);
 }
 
