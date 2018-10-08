@@ -12,14 +12,21 @@
 
 #include "ft_minishell.h"
 
-static void	sig_handler(int signo)
+void	ft_sig_handler(int signo)
 {
 	if (signo == SIGINT)
-		return ;
+	{
+		ft_putstr("\n");
+		signal(SIGINT, ft_sig_handler);
+	}
 }
 
-void		ft_signal(void)
+void	ft_signal(int signo)
 {
-	if (signal(SIGINT, sig_handler) == SIG_ERR)
-		return ;
+	if (signo == SIGINT)
+	{
+		ft_putstr("\n");
+		ft_aff_prompt();
+		signal(SIGINT, ft_signal);
+	}
 }

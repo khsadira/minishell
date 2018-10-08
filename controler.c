@@ -60,6 +60,13 @@ t_env		*ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 	return (l_env);
 }
 
+static t_env		*ft_init(int ac, char **av)
+{
+	(void)ac;
+	av++;
+	return (NULL);
+}
+
 int			main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -70,11 +77,12 @@ int			main(int ac, char **av, char **env)
 	line = NULL;
 	gnl_word = NULL;
 	ret = 0;
+	l_env = ft_init(ac, av);
 	l_env = ft_creat_env(env, l_env);
 	while (1)
 	{
-		ft_signal();
-		ft_putstr("$>");
+		ft_aff_prompt();
+		signal(SIGINT, ft_signal);
 		if ((ret = get_next_line(0, &line)) > 0)
 		{
 			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);

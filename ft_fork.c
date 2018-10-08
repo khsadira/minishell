@@ -17,6 +17,7 @@ static int		ft_fork(char *path, char **arg, char **env)
 	pid_t	pid;
 
 	pid = fork();
+	signal(SIGINT, ft_sig_handler);
 	if (pid == 0)
 	{
 		execve(path, arg, env);

@@ -35,6 +35,8 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
+void			ft_sig_handler(int signo);
+void			ft_aff_prompt(void);
 void			ft_no_such_file_or_dir(char *name, char *arg);
 void			ft_not_dir(char *name, char *arg);
 void			ft_permission_denied(char *name, char *arg);
@@ -54,7 +56,7 @@ int				ft_print_cd_error(int nb_error, char *rep);
 char			*ft_creat_path(char *path_tab, char *cmd);
 int				ft_acces(char *cmd, char *path);
 void			ft_compare_list(t_lst *l1, t_lst *l2);
-void			ft_signal(void);
+void			ft_signal(int signo);
 void			ft_exec(t_lst *list, char **env);
 void			ft_freeall(char **path_tab, t_lst *list, char **env);
 void			ft_freeall_exit(char **path_tab, t_lst *list,
