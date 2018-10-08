@@ -6,79 +6,108 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 09:59:06 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/02 14:57:38 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:42:24 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-static int		ft_check_opts(char **arg)
+static char			*get_cd_path(t_env *env, char *arg)
 {
-	int	i;
-	int	opts;
-	int	j;
+	char	*tmp;
 
-	opts = 0;
-	i = 1;
-	while (arg[i])
+	if (arg == NULL)
 	{
-		if (arg[i][0] != '-' || ft_strequ("--", arg[i]))
-			return (opts);
-		j = 1;
-		while (arg[i][j])
+		if ((tmp = ft_get_env(env, "HOME")))
+			return (tmp);
+		else
 		{
-			if (arg[i][j] == 'P')
-				opts = 1;
-			j++;
+			ft_putendl_fd("minishell: cd: HOME not set", 2);
+			return (NULL);
 		}
-		i++;
 	}
-	return (opts);
+	else if (ft_strequ(arg, "-"))
+	{
+		if ((tmp = ft_get_env(env, "OLDPWD")) != NULL)
+			return (tmp);
+		else
+		{
+			ft_putendl_fd("minishell: cd : OLDPWD not set", 2);
+			return (NULL);
+		}
+	}
+	else
+		return (arg);
 }
 
-static t_lst	*ft_creat_arg(t_lst *list, t_env *env)
+static int			check_error_path(char *path, char *arg)
 {
-	char	*buf;
-	char	**tab;
-	char	*name;
+	struct stat		stbuf;
+	DIR				*diropen;
 
-
-	if (!(name = ft_search_env("HOME", env)))
-		return (list);
-	buf = ft_strdup("cd ");
-	buf = ft_strfjoin(&buf, name);
-	tab = ft_strsplit(buf, ' ');
-	ft_freedstr(list->arg);
-	free(buf);
-	list->arg = tab;
-	return (list);
+	if (path == NULL)
+		return (-1);
+	if (lstat(path, &stbuf) == -1)
+	{
+		ft_no_such_file_or_dir("cd: ", arg);
+		return (-1);
+	}
+	if (!S_ISDIR(stbuf.st_mode) && !S_ISLNK(stbuf.st_mode))
+	{
+		ft_not_dir("cd: ", arg);
+		return (-1);
+	}
+	if (!(diropen = opendir(path)))
+	{
+		ft_permission_denied("cd: ", arg);
+		return (-1);
+	}
+	else
+		closedir(diropen);
+	return (1);
 }
 
-int				ft_built_cd(t_lst *list, t_env **env)
+static t_env		*init_pwd(t_env *env)
 {
-	char	*dir;
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	env = ft_setenv_c("PWD", cwd, env);
+	return (env);
+}
+
+static int			ft_dstrlen(char **arg)
+{
 	int		i;
 
-	if ((i = ft_check_cd_error(list->arg)) == -1)
-		return (1);
-	if (ft_check_opts(list->arg) == 0)
-		list->arg[i] = ft_creat_cd_lnk(list->arg[i], *env);
-	if (ft_strequ(list->arg[i], "-"))
+	i = 0;
+	while (arg[i])
+		i++;
+	return (i);
+}
+
+t_env				*ft_built_cd(t_lst *list, t_env *env)
+{
+	char	*path;
+	char	*cwd;
+	char	*pwd;
+
+	if (ft_dstrlen(list->arg) > 2)
 	{
-		if (!(dir = ft_search_env("OLDPWD", *env)))
-			return (ft_print_cd_error(3, NULL));
-		free(list->arg[i]);
-		list->arg[i] = ft_strdup(dir);
-		ft_putendl(list->arg[i]);
+		ft_putendl_fd("cd: too many arguments", 2);
+		return (env);
 	}
-	if (list->arg[i] == NULL && (i = 1))
-		list = ft_creat_arg(list, *env);
-	if (access(list->arg[i], R_OK) == 0)
+	env = init_pwd(env);
+	path = get_cd_path(env, list->arg[1]);
+	if (check_error_path(path, list->arg[1]) == -1)
+		return (env);
+	if (path != NULL)
 	{
-		ft_setenv_char("OLDPWD", *env);
-		chdir(list->arg[i]);
-		ft_setenv_char("PWD", *env);
-		return (1);
+		pwd = ft_get_env(env, "PWD");
+		env = ft_setenv_c("OLDPWD", ft_strdup(pwd), env);
+		chdir(path);
+		cwd = getcwd(NULL, 0);
+		env = ft_setenv_c("PWD", cwd, env);
 	}
-	return (ft_print_cd_error(2, list->arg[i]));
+	return (env);
 }

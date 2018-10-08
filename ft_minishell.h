@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:35:30 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:11:09 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:41:53 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/libft.h"
 # include "get_next_line.h"
 # include <sys/stat.h>
+# include <dirent.h>
 
 typedef struct	s_lst
 {
@@ -34,6 +35,10 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
+void			ft_no_such_file_or_dir(char *name, char *arg);
+void			ft_not_dir(char *name, char *arg);
+void			ft_permission_denied(char *name, char *arg);
+char			*ft_get_env(t_env *env, char *name);
 int				ft_start_prog(char **gnl_word, char **env,
 								t_env *l_env, int i);
 char			**ft_list_to_env(t_env *env);
@@ -62,7 +67,7 @@ void			ft_freeenv(t_env *list);
 t_env			*ft_creat_env(char **env, t_env *l_env);
 t_env			*ft_check_env(t_lst *list, t_env *l_env, int builtin);
 int				ft_built_echo(t_lst *list, t_env *env);
-int				ft_built_cd(t_lst *list, t_env **env);
+t_env			*ft_built_cd(t_lst *list, t_env *env);
 t_env			*ft_addenv(t_env *list, t_env *new_ele);
 t_env			*ft_newenv(char *name, char *arg);
 int				ft_check_built(char *name);

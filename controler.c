@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/08 13:21:11 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:43:11 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ char		**ft_get_path(t_env *env)
 	return (NULL);
 }
 
-static void	ft_call_builtin(t_lst *list, t_env *l_env, int builtin)
+static t_env	*ft_call_builtin(t_lst *list, t_env *l_env, int builtin)
 {
 	if (builtin == 4)
 		ft_built_echo(list, l_env);
 	else if (builtin == 5)
-		ft_built_cd(list, &l_env);
+		l_env = ft_built_cd(list, l_env);
+	return (l_env);
 }
 
 int			ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
@@ -49,7 +50,7 @@ int			ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 			else if (builtin >= 1 && builtin <= 3)
 				l_env = ft_check_env(list, l_env, builtin);
 			else
-				ft_call_builtin(list, l_env, builtin);
+				l_env = ft_call_builtin(list, l_env, builtin);
 		}
 		else if (list)
 			ft_exec(list, env);
@@ -66,6 +67,11 @@ int			main(int ac, char **av, char **env)
 	t_env	*l_env;
 	int		ret;
 
+	if (isatty(STDIN_FILENO) == 0)
+	{
+		ft_putendl_fd("Wrong fd", 2);
+		exit(EXIT_FAILURE);
+	}
 	(void)ac;
 	av++;
 	l_env = NULL;

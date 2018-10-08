@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:48:59 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 15:39:20 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:43:23 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_freedstr(char **arg)
 		return ;
 	while (arg[i])
 	{
-		free(arg[i]);
+		ft_strdel(&arg[i]);
 		i++;
 	}
 	if (arg)
@@ -34,8 +34,8 @@ void	ft_freelst(t_lst *list)
 
 	while (list)
 	{
-		free(list->path);
-		free(list->cmd);
+		ft_strdel(&list->path);
+		ft_strdel(&list->cmd);
 		ft_freedstr(list->arg);
 		tmp = list;
 		list = list->next;

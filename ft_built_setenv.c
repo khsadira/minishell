@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:00:41 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:16:08 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:26:35 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,31 @@ t_env			*ft_setenv_char(char *name, t_env *env)
 	return (h_env);
 }
 
+char			*ft_get_env(t_env *env, char *name)
+{
+	if (!name)
+		return (NULL);
+	while (env)
+	{
+		if (ft_strequ(env->name, name))
+			return (env->arg);
+		env = env->next;
+	}
+	return (NULL);
+}
+
 t_env			*ft_setenv_c(char *name, char *arg, t_env *env)
 {
 	t_env	*h_env;
 
+	if (!arg)
+		return (env);
 	h_env = env;
 	while (env)
 	{
 		if (ft_strequ(env->name, name) == 1)
 		{
-			if (env->arg)
-				free(env->arg);
+			ft_strdel(&env->arg);
 			env->arg = arg;
 			return (h_env);
 		}
