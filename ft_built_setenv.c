@@ -78,14 +78,14 @@ static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 		if (ft_strequ(env->name, list->arg[1]))
 		{
 			free(env->arg);
-			env->arg = ft_strdup("");
+			env->arg = NULL;
 			return (h_env);
 		}
 		env = env->next;
 	}
-	env = ft_newenv(ft_strdup(list->arg[1]), ft_strdup(""));
+	env = ft_newenv(ft_strdup(list->arg[1]), NULL);
 	h_env = ft_addenv(h_env, env);
-	return (env);
+	return (h_env);
 }
 
 t_env			*ft_setenv(t_lst *list, t_env *l_env)
