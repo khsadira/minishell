@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:40:28 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 15:41:55 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/02 13:36:34 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ static char	*ft_to_env(char *name, char *arg)
 	int		len;
 
 	ret = NULL;
-	len = ft_strlen(name) + ft_strlen(arg) + 1;
+	len = 1;
+	if (name)
+		len += ft_strlen(name);
+	if (arg)
+		len += ft_strlen(arg);
 	ret = ft_strnew(len);
 	i = 0;
 	j = 0;
@@ -41,7 +45,7 @@ static char	*ft_to_env(char *name, char *arg)
 		ret[i++] = name[j++];
 	ret[i++] = '=';
 	j = 0;
-	while (arg[j])
+	while (arg && arg[j])
 		ret[i++] = arg[j++];
 	ret[i] = '\0';
 	return (ret);
@@ -62,7 +66,8 @@ char		**ft_list_to_env(t_env *env)
 	len = 0;
 	while (env)
 	{
-		ret[i++] = ft_to_env(env->name, env->arg);
+		ret[i] = ft_to_env(env->name, env->arg);
+		i++;
 		env = env->next;
 	}
 	return (ret);

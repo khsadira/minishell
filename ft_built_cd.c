@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 09:59:06 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:08:18 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/02 14:57:38 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static t_lst	*ft_creat_arg(t_lst *list, t_env *env)
 	char	**tab;
 	char	*name;
 
-	name = ft_search_env("HOME", env);
+
+	if (!(name = ft_search_env("HOME", env)))
+		return (list);
 	buf = ft_strdup("cd ");
 	buf = ft_strfjoin(&buf, name);
 	tab = ft_strsplit(buf, ' ');

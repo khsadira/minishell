@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 15:33:30 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/08 13:21:11 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			main(int ac, char **av, char **env)
 	char	*line;
 	char	**gnl_word;
 	t_env	*l_env;
+	int		ret;
 
 	(void)ac;
 	av++;
@@ -73,14 +74,16 @@ int			main(int ac, char **av, char **env)
 	{
 		ft_signal();
 		ft_putstr("$>");
-		if (get_next_line(0, &line) > 0)
+		if ((ret = get_next_line(0, &line)) > 0)
 		{
 			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
 			free(line);
+			ft_start_prog(gnl_word, NULL, l_env, 0);
+			ft_freedstr(gnl_word);
 		}
+		else if (ret == 0)
+			write(1, "\n", 1);
 		else
-			gnl_word = ft_rework_cmd(ft_strsplit(line, ';'), l_env);
-		ft_start_prog(gnl_word, NULL, l_env, 0);
-		ft_freedstr(gnl_word);
+			exit(1);
 	}
 }

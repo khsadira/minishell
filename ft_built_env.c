@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:05:33 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:00:08 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/02 13:41:49 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ t_env			*ft_dupenv(t_env *env)
 	{
 		if (!(new = (t_env *)malloc(sizeof(*new))))
 			return (NULL);
-		new->name = ft_strdup(tmp->name);
-		new->arg = ft_strdup(tmp->arg);
+		if (new->name)
+			new->name = ft_strdup(tmp->name);
+		if (new->arg)
+			new->arg = ft_strdup(tmp->arg);
 		new->next = NULL;
 		head = ft_addenv(head, new);
 		tmp = tmp->next;
@@ -85,8 +87,10 @@ void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 		}
 		else if ((c = ft_strichr(list->arg[i], '=')) != -1)
 		{
+			ft_putendl("ici3\n");
 			l_env = ft_setenv_c(ft_strsub(list->arg[i], 0, c),
-			ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c), l_env);
+				ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c), l_env);
+			ft_putendl("ici1\n");
 			return (ft_built_env(list, l_env, i + 1, a));
 		}
 		i++;

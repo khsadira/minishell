@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:03:15 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/11 10:03:19 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/02 13:43:25 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	ft_built_echo(t_lst *list, t_env *env)
 	else
 		i = 1;
 	while (list->arg[i])
+	{
+		if (i != 1)
+			ft_putchar(' ');
 		ft_putstr(list->arg[i++]);
+	}
 	if (!n)
 		ft_putchar(10);
 	return (1);
