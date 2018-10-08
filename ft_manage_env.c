@@ -17,11 +17,12 @@ static	char	*ft_return_arg(char *str)
 	char	*arg;
 	int		i;
 
+	arg = NULL;
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
 	i++;
-	arg = ft_strdup(str + i);
+	arg = ft_strsub(str, i, ft_strlen(str) - i);
 	return (arg);
 }
 
@@ -30,6 +31,7 @@ static	char	*ft_return_name(char *str)
 	char	*name;
 	int		j;
 
+	name = NULL;
 	j = 0;
 	while (str[j] && str[j] != '=')
 		j++;
@@ -53,6 +55,8 @@ static char		*ft_push_i(char *arg)
 	int		stock;
 	char	*tmp;
 
+	tmp = NULL;
+	stock = 0;
 	stock = ft_atoi(arg);
 	stock++;
 	tmp = arg;
@@ -68,8 +72,11 @@ t_env			*ft_creat_env(char **env, t_env *l_env)
 	int		i;
 	t_env	*new_ele;
 
+	name = NULL;
+	arg = NULL;
 	l_env = NULL;
 	i = 0;
+	new_ele = NULL;
 	while (env[i])
 	{
 		name = ft_return_name(env[i]);

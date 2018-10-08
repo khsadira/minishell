@@ -31,7 +31,8 @@ t_lst	*ft_newele(char *name)
 {
 	t_lst	*list;
 
-	if (!(list = (t_lst *)malloc(sizeof(t_lst))))
+	list = NULL;
+	if (!(list = (t_lst *)malloc(sizeof(*list))))
 		return (NULL);
 	list->path = name;
 	list->cmd = NULL;
@@ -60,6 +61,7 @@ t_env	*ft_newenv(char *name, char *arg)
 {
 	t_env	*list;
 
+	list = NULL;
 	if (!(list = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
 	list->name = name;

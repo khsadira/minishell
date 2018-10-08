@@ -39,7 +39,7 @@ void			ft_no_such_file_or_dir(char *name, char *arg);
 void			ft_not_dir(char *name, char *arg);
 void			ft_permission_denied(char *name, char *arg);
 char			*ft_get_env(t_env *env, char *name);
-int				ft_start_prog(char **gnl_word, char **env,
+t_env				*ft_start_prog(char **gnl_word, char **env,
 								t_env *l_env, int i);
 char			**ft_list_to_env(t_env *env);
 int				ft_check_env_err(char **arg, int stock, int i);

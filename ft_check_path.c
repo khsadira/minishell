@@ -45,7 +45,7 @@ static t_lst	*ft_up_list(char *path, char *cmd, t_lst *list, int built)
 	}
 	else if (built == 0)
 	{
-		new_ele = ft_newele(ft_strdup(path));
+	new_ele = ft_newele(ft_strdup(path));
 		new_ele->built = 0;
 	}
 	else

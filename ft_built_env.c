@@ -18,6 +18,7 @@ t_env			*ft_dupenv(t_env *env)
 	t_env	*head;
 	t_env	*tmp;
 
+	tmp = NULL;
 	head = NULL;
 	tmp = env;
 	new = NULL;
