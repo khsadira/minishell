@@ -27,16 +27,6 @@ static char			*get_cd_path(t_env *env, char *arg)
 			return (NULL);
 		}
 	}
-	else if (ft_strequ(arg, "-"))
-	{
-		if ((tmp = ft_search_env("OLDPWD", env)))
-			return (tmp);
-		else
-		{
-			ft_putendl_fd("cd : OLDPWD not set", 2);
-			return (NULL);
-		}
-	}
 	else
 		return (arg);
 }
@@ -77,6 +67,31 @@ static t_env		*init_pwd(t_env *env)
 	return (env);
 }
 
+static t_env		*ft_cd_oldpwd(t_env *env)
+{
+	char	*tmp;
+	char	*pwd;
+	char	*cwd;
+
+	tmp = NULL;
+	pwd = NULL;
+	cwd = NULL;
+	if (!(tmp = ft_search_env("OLDPWD", env)))
+	{
+		ft_putendl_fd("cd : OLDPWD not set", 2);
+		return (env);
+	}
+	cwd = ft_strdup(tmp);
+	pwd = ft_search_env("PWD", env);
+	env = ft_setenv_c("OLDPWD", ft_strdup(pwd), env);
+	chdir(cwd);
+	ft_strdel(&cwd);
+	cwd = getcwd(NULL, 0);
+	env = ft_setenv_c("PWD", cwd, env);
+	return (env);
+	
+}
+
 t_env				*ft_built_cd(t_lst *list, t_env *env)
 {
 	char	*path;
@@ -88,6 +103,8 @@ t_env				*ft_built_cd(t_lst *list, t_env *env)
 		ft_putendl_fd("cd: too many arguments", 2);
 		return (env);
 	}
+	if (ft_strequ(list->arg[1], "-"))
+		return (env = ft_cd_oldpwd(env));
 	env = init_pwd(env);
 	path = get_cd_path(env, list->arg[1]);
 	if (check_error_path(path, list->arg[1]) == -1)
