@@ -16,23 +16,24 @@ static char			*get_cd_path(t_env *env, char *arg)
 {
 	char	*tmp;
 
+	tmp = NULL;
 	if (arg == NULL)
 	{
 		if ((tmp = ft_search_env("HOME", env)))
 			return (tmp);
 		else
 		{
-			ft_putendl_fd("minishell: cd: HOME not set", 2);
+			ft_putendl_fd("cd: HOME not set", 2);
 			return (NULL);
 		}
 	}
 	else if (ft_strequ(arg, "-"))
 	{
-		if ((tmp = ft_search_env("OLDPWD", env)) != NULL)
+		if ((tmp = ft_search_env("OLDPWD", env)))
 			return (tmp);
 		else
 		{
-			ft_putendl_fd("minishell: cd : OLDPWD not set", 2);
+			ft_putendl_fd("cd : OLDPWD not set", 2);
 			return (NULL);
 		}
 	}
@@ -91,7 +92,7 @@ t_env				*ft_built_cd(t_lst *list, t_env *env)
 	path = get_cd_path(env, list->arg[1]);
 	if (check_error_path(path, list->arg[1]) == -1)
 		return (env);
-	if (path != NULL)
+	if (path)
 	{
 		pwd = ft_search_env("PWD", env);
 		env = ft_setenv_c("OLDPWD", ft_strdup(pwd), env);

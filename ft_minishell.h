@@ -14,9 +14,10 @@
 # define FT_MINISHELL_H
 
 # include "./libft/libft.h"
-# include "get_next_line.h"
 # include <sys/stat.h>
 # include <dirent.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_lst
 {
@@ -35,6 +36,8 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
+int			ft_is_term(void);
+int			ft_regnl(char **str);
 void			ft_free_one_env(t_env *list);
 int			ft_dstrlen(char **arg);
 void			ft_sig_handler(int signo);

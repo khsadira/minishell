@@ -8,14 +8,17 @@ void	ft_aff_prompt(void)
 	int	len;
 	char	*tmp;
 
-	cwd = getcwd(buff, 4096);
-	len = ft_strlen(cwd);
-	i = len;
-	while (i > 0 && cwd[i] != '/')
-		i--;
-	if (cwd[i] == '/')
-		i++;
-	tmp = ft_strsub(cwd, i, len - i);
+	tmp = NULL;
+	if ((cwd = getcwd(buff, 4096)))
+	{
+		len = ft_strlen(cwd);
+		i = len;
+		while (i > 0 && cwd[i] != '/')
+			i--;
+		if (cwd[i] == '/')
+			i++;
+		tmp = ft_strsub(cwd, i, len - i);
+	}
 	ft_putstr("\033[0;31m");
 	ft_putstr("<");
 	ft_putstr(tmp);

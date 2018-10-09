@@ -43,7 +43,7 @@ char			*ft_search_env(char *str, t_env *env)
 {
 	while (env)
 	{
-		if (ft_strequ(env->name, str) == 1)
+		if (ft_strequ(env->name, str))
 			return (env->arg);
 		env = env->next;
 	}
