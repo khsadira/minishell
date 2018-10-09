@@ -26,6 +26,16 @@ static int	ft_put_setenv_error(int err)
 	return (1);
 }
 
+int		ft_dstrlen(char **arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+		i++;
+	return (i);
+}
+
 int			ft_check_env_error(t_lst *list)
 {
 	int	i;
@@ -33,7 +43,7 @@ int			ft_check_env_error(t_lst *list)
 	i = 0;
 	if (!ft_isalpha(list->arg[1][i]))
 		return (ft_put_setenv_error(1));
-	if (list->arg[3])
+	if (ft_dstrlen(list->arg) > 3)
 		return (ft_put_setenv_error(2));
 	else if (list->arg[1])
 	{

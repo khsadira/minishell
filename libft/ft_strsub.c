@@ -28,5 +28,6 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		fraiche[i] = s[start + i];
 		i++;
 	}
+	fraiche[i] = '\0';
 	return (fraiche);
 }

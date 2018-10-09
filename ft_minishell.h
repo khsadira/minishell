@@ -35,6 +35,8 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
+void			ft_free_one_env(t_env *list);
+int			ft_dstrlen(char **arg);
 void			ft_sig_handler(int signo);
 void			ft_aff_prompt(void);
 void			ft_no_such_file_or_dir(char *name, char *arg);

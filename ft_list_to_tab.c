@@ -28,26 +28,13 @@ static int	ft_env_len(t_env *env)
 static char	*ft_to_env(char *name, char *arg)
 {
 	char	*ret;
-	int		i;
-	int		j;
-	int		len;
+	char	*tmp;
 
-	ret = NULL;
-	len = 1;
-	if (name)
-		len += ft_strlen(name);
-	if (arg)
-		len += ft_strlen(arg);
-	ret = ft_strnew(len);
-	i = 0;
-	j = 0;
-	while (name[j])
-		ret[i++] = name[j++];
-	ret[i++] = '=';
-	j = 0;
-	while (arg && arg[j])
-		ret[i++] = arg[j++];
-	ret[i] = '\0';
+	ret = ft_strdup(name);
+	tmp = ft_strdup(arg);
+	ret = ft_strfjoin(&ret, "=");
+	ret = ft_strfjoin(&ret, arg);
+	ft_strdel(&tmp);
 	return (ret);
 }
 
@@ -60,7 +47,7 @@ char		**ft_list_to_env(t_env *env)
 	i = 0;
 	if (!(len = ft_env_len(env)))
 		return (NULL);
-	if (!(ret = malloc(sizeof(*ret) * (len + 1))))
+	if (!(ret = (char **)malloc(sizeof(char *) * (len + 1))))
 		return (NULL);
 	ret[len] = NULL;
 	len = 0;

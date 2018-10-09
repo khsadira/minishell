@@ -39,7 +39,7 @@ char			*ft_get_env(t_env *env, char *name)
 		return (NULL);
 	while (env)
 	{
-		if (ft_strequ(env->name, name))
+		if (ft_strequ(name, env->name))
 			return (env->arg);
 		env = env->next;
 	}
@@ -78,12 +78,12 @@ static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 		if (ft_strequ(env->name, list->arg[1]))
 		{
 			free(env->arg);
-			env->arg = NULL;
+			env->arg = ft_strdup("");
 			return (h_env);
 		}
 		env = env->next;
 	}
-	env = ft_newenv(ft_strdup(list->arg[1]), NULL);
+	env = ft_newenv(ft_strdup(list->arg[1]), ft_strdup(""));
 	h_env = ft_addenv(h_env, env);
 	return (h_env);
 }
@@ -91,22 +91,24 @@ static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 t_env			*ft_setenv(t_lst *list, t_env *l_env)
 {
 	t_env	*h_env;
+	int	len;
 
-	h_env = l_env;
-	if (!list->arg[1])
+	len = ft_dstrlen(list->arg);
+	if (len == 1)
 	{
-		ft_printenv(h_env);
-		return (h_env);
+		ft_printenv(l_env);
+		return (l_env);
 	}
 	else if (ft_check_env_error(list))
-		return (h_env);
-	else if (!list->arg[2])
+		return (l_env);
+	else if (len == 2)
 		return (ft_setenv_nullarg(list, l_env));
+	h_env = l_env;
 	while (l_env)
 	{
 		if (ft_strequ(l_env->name, list->arg[1]))
 		{
-			free(l_env->arg);
+			ft_strdel(&l_env->arg);
 			l_env->arg = ft_strdup(list->arg[2]);
 			return (h_env);
 		}

@@ -18,7 +18,7 @@ static char			*get_cd_path(t_env *env, char *arg)
 
 	if (arg == NULL)
 	{
-		if ((tmp = ft_get_env(env, "HOME")))
+		if ((tmp = ft_search_env("HOME", env)))
 			return (tmp);
 		else
 		{
@@ -28,7 +28,7 @@ static char			*get_cd_path(t_env *env, char *arg)
 	}
 	else if (ft_strequ(arg, "-"))
 	{
-		if ((tmp = ft_get_env(env, "OLDPWD")) != NULL)
+		if ((tmp = ft_search_env("OLDPWD", env)) != NULL)
 			return (tmp);
 		else
 		{
@@ -76,16 +76,6 @@ static t_env		*init_pwd(t_env *env)
 	return (env);
 }
 
-static int			ft_dstrlen(char **arg)
-{
-	int		i;
-
-	i = 0;
-	while (arg[i])
-		i++;
-	return (i);
-}
-
 t_env				*ft_built_cd(t_lst *list, t_env *env)
 {
 	char	*path;
@@ -103,7 +93,7 @@ t_env				*ft_built_cd(t_lst *list, t_env *env)
 		return (env);
 	if (path != NULL)
 	{
-		pwd = ft_get_env(env, "PWD");
+		pwd = ft_search_env("PWD", env);
 		env = ft_setenv_c("OLDPWD", ft_strdup(pwd), env);
 		chdir(path);
 		cwd = getcwd(NULL, 0);

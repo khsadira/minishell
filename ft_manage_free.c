@@ -34,8 +34,8 @@ void	ft_freelst(t_lst *list)
 
 	while (list)
 	{
-		ft_strdel(&list->path);
-		ft_strdel(&list->cmd);
+		ft_strdel(&(list->path));
+		ft_strdel(&(list->cmd));
 		ft_freedstr(list->arg);
 		tmp = list;
 		list = list->next;
@@ -49,24 +49,29 @@ void	ft_freeenv(t_env *list)
 
 	while (list)
 	{
-		free(list->name);
-		free(list->arg);
+		ft_strdel(&(list->name));
+		ft_strdel(&(list->arg));
 		tmp = list;
 		list = list->next;
 		free(tmp);
 	}
 }
 
+void	ft_free_one_env(t_env *list)
+{
+	ft_strdel(&(list->name));
+	ft_strdel(&(list->arg));
+	list->next = NULL;
+	free(list);
+}
+
 void	ft_freeall_exit(char **path_tab, t_lst *list,
 						char **gnl_word, char **env)
 {
-	if (path_tab)
-		ft_freedstr(path_tab);
+	ft_freedstr(path_tab);
 	ft_freelst(list);
-	if (env)
-		ft_freedstr(env);
-	if (gnl_word)
-		ft_freedstr(gnl_word);
+	ft_freedstr(env);
+	ft_freedstr(gnl_word);
 	exit(1);
 }
 
@@ -75,9 +80,7 @@ void	ft_freeall(char **path_tab, t_lst *list, char **env)
 	int		i;
 
 	i = 0;
-	if (path_tab)
-		ft_freedstr(path_tab);
-	if (env)
-		ft_freedstr(env);
+	ft_freedstr(path_tab);
+	ft_freedstr(env);
 	ft_freelst(list);
 }
