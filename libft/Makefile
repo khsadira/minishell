@@ -6,12 +6,12 @@
 #    By: khsadira <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 12:20:33 by khsadira          #+#    #+#              #
-#    Updated: 2018/09/19 12:33:23 by khsadira         ###   ########.fr        #
+#    Updated: 2018/10/10 14:36:59 by khsadira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-SRCS =  ft_strfjoin.c ft_strichr.c ft_strdlen.c ft_memccpy.c	ft_putnbr.c	ft_strequ.c\
+SRCS =  ft_str_splitwhite_c.c ft_strfjoin.c ft_strichr.c ft_strdlen.c ft_memccpy.c	ft_putnbr.c	ft_strequ.c\
 	ft_strnequ.c ft_memchr.c	ft_putnbr_fd.c	ft_striter.c ft_strnew.c\
 	ft_atoi.c ft_memcmp.c ft_putstr.c ft_striteri.c ft_strnstr.c\
 	ft_bzero.c	ft_memcpy.c	ft_putstr_fd.c	ft_strjoin.c ft_strrchr.c\

@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 15:30:57 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:12:25 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 14:38:57 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
+char			*ft_str_splitwhite_c(char *str);
 char			*ft_strfjoin(char **over, char *buff);
 int				ft_strichr(char *str, char c);
 int				ft_strdlen(char **arg);

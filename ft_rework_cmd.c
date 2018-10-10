@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 12:48:47 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/02 14:55:26 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 14:37:26 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static char	**ft_trimarg(char **str)
 	{
 		tmp = str[i];
 		str[i] = ft_strtrim(str[i]);
+		str[i] = ft_str_splitwhite_c(str[i]);
 		free(tmp);
 		i++;
 	}
