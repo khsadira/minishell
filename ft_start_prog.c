@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_start_prog.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/10 09:26:59 by khsadira          #+#    #+#             */
+/*   Updated: 2018/10/10 09:27:12 by khsadira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minishell.h"
 
-char		**ft_get_path(t_env *env)
+char			**ft_get_path(t_env *env)
 {
 	while (env)
 	{
@@ -20,7 +32,7 @@ static t_env	*ft_call_builtin(t_lst *list, t_env *l_env, int builtin)
 	return (l_env);
 }
 
-t_env		*ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
+t_env			*ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 {
 	int		builtin;
 	t_lst	*list;
@@ -47,4 +59,3 @@ t_env		*ft_start_prog(char **gnl_word, char **env, t_env *l_env, int i)
 	}
 	return (l_env);
 }
-

@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:18:42 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 16:16:29 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:33:48 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_env	*ft_unset(char *str, t_env *l_env)
 	return (h_env);
 }
 
-t_env		*ft_unsetenv(t_lst *list, t_env *l_env)
+t_env			*ft_unsetenv(t_lst *list, t_env *l_env)
 {
 	int	i;
 	int	len;

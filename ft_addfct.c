@@ -6,13 +6,13 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 12:29:31 by khsadira          #+#    #+#             */
-/*   Updated: 2018/09/19 12:31:27 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:36:30 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-char	*ft_creat_path(char *path, char *cmd)
+char		*ft_creat_path(char *path, char *cmd)
 {
 	char	*ret;
 
@@ -22,7 +22,7 @@ char	*ft_creat_path(char *path, char *cmd)
 	return (ret);
 }
 
-int		ft_acces(char *cmd, char *path)
+int			ft_acces(char *cmd, char *path)
 {
 	if (!ft_strequ(cmd, ".") &&
 		!ft_strequ(cmd, "..") &&
@@ -31,21 +31,22 @@ int		ft_acces(char *cmd, char *path)
 	return (0);
 }
 
-int		ft_is_term(void)
+int			ft_is_term(void)
 {
 	struct stat	stbuf;
+
 	if (fstat(STDIN_FILENO, &stbuf) < 0)
 		return (0);
 	else
 		return (S_ISCHR(stbuf.st_mode));
 }
 
-void	ft_aff_prompt(void)
+void		ft_aff_prompt(void)
 {
 	char	*cwd;
 	char	buff[4096 + 1];
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*tmp;
 
 	tmp = NULL;
@@ -67,12 +68,12 @@ void	ft_aff_prompt(void)
 	free(tmp);
 }
 
-int	ft_regnl(char **str)
+int			ft_regnl(char **str)
 {
-	int	ret;
+	int		ret;
 	char	buff[2];
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 
 	buff[0] = 0;
 	buff[1] = 0;

@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:05:33 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/02 13:41:49 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:33:00 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 		else if ((c = ft_strichr(list->arg[i], '=')) != -1)
 		{
 			l_env = ft_setenv_c(ft_strsub(list->arg[i], 0, c),
-				ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c), l_env);
+				ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c),
+				l_env);
 			return (ft_built_env(list, l_env, i + 1, a));
 		}
 		i++;

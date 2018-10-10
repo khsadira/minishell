@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:11:55 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/01 15:59:23 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:32:09 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_put_setenv_error(int err)
 	return (1);
 }
 
-int		ft_dstrlen(char **arg)
+int			ft_dstrlen(char **arg)
 {
 	int	i;
 

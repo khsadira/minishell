@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:48:59 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/08 15:43:23 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:27:50 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ void	ft_freeenv(t_env *list)
 		list = list->next;
 		free(tmp);
 	}
-}
-
-void	ft_free_one_env(t_env *list)
-{
-	ft_strdel(&(list->name));
-	ft_strdel(&(list->arg));
-	list->next = NULL;
-	free(list);
 }
 
 void	ft_freeall_exit(char **path_tab, t_lst *list,

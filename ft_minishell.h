@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:35:30 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/08 15:41:53 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:37:00 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,16 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
-int			ft_is_term(void);
-int			ft_regnl(char **str);
-void			ft_free_one_env(t_env *list);
-int			ft_dstrlen(char **arg);
+int				ft_is_term(void);
+int				ft_regnl(char **str);
+int				ft_dstrlen(char **arg);
 void			ft_sig_handler(int signo);
 void			ft_aff_prompt(void);
 void			ft_no_such_file_or_dir(char *name, char *arg);
 void			ft_not_dir(char *name, char *arg);
 void			ft_permission_denied(char *name, char *arg);
 char			*ft_get_env(t_env *env, char *name);
-t_env				*ft_start_prog(char **gnl_word, char **env,
+t_env			*ft_start_prog(char **gnl_word, char **env,
 								t_env *l_env, int i);
 char			**ft_list_to_env(t_env *env);
 int				ft_check_env_err(char **arg, int stock, int i);

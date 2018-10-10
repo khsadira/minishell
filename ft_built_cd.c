@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 09:59:06 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/08 15:42:24 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:33:30 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static t_env		*ft_cd_oldpwd(t_env *env)
 	cwd = getcwd(NULL, 0);
 	env = ft_setenv_c("PWD", cwd, env);
 	return (env);
-	
 }
 
 t_env				*ft_built_cd(t_lst *list, t_env *env)

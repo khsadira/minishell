@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:00:41 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/08 15:26:35 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/10 09:31:16 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,9 @@ static t_env	*ft_setenv_nullarg(t_lst *list, t_env *env)
 t_env			*ft_setenv(t_lst *list, t_env *l_env)
 {
 	t_env	*h_env;
-	int	len;
+	int		len;
 
-	len = ft_dstrlen(list->arg);
-	if (len == 1)
+	if ((len = ft_dstrlen(list->arg)) == 1)
 	{
 		ft_printenv(l_env);
 		return (l_env);
@@ -115,6 +114,5 @@ t_env			*ft_setenv(t_lst *list, t_env *l_env)
 		l_env = l_env->next;
 	}
 	l_env = ft_newenv(ft_strdup(list->arg[1]), ft_strdup(list->arg[2]));
-	h_env = ft_addenv(h_env, l_env);
-	return (h_env);
+	return (h_env = ft_addenv(h_env, l_env));
 }
