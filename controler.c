@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/31 15:49:10 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/11 09:50:31 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/11 12:25:41 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ static t_env		*ft_prog(t_env *env)
 	if ((ret = ft_regnl(&line)))
 	{
 		cmd = ft_rework_cmd(ft_strsplit(line, ';'), env);
-		free(line);
+		ft_strdel(&line);
 		env = ft_start_prog(cmd, NULL, env, 0);
 		ft_freedstr(cmd);
 	}
 	else if (ret == 0)
+	{
 		write(1, "\n", 1);
+		ft_strdel(&line);
+	}
 	else
 		exit(1);
 	return (env);
