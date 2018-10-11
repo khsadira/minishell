@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 12:48:47 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/10 14:37:26 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/11 09:56:41 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static char	**ft_trimarg(char **str)
 	{
 		tmp = str[i];
 		str[i] = ft_strtrim(str[i]);
-		str[i] = ft_str_splitwhite_c(str[i]);
 		free(tmp);
 		i++;
 	}
@@ -85,7 +84,8 @@ char		**ft_rework_cmd(char **arg, t_env *env)
 				arg[i] = ft_put_arg_dol(arg[i], j, env);
 			else if ((ft_strnequ(arg[i] + j, "~", 1) && (!arg[i][j + 1] ||
 						arg[i][j + 1] == '/' || arg[i][j + 1] == ' ')
-						&& (!arg[i][j - 1] || arg[i][j - 1] == ' ')))
+						&& (!arg[i][j - 1] || (arg[i][j - 1] == ' ' ||
+											arg[i][j - 1] == '\t'))))
 				arg[i] = ft_put_arg_tild(arg[i], j, env);
 			j++;
 		}

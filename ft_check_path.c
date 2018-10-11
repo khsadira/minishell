@@ -6,7 +6,7 @@
 /*   By: khsadira <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 10:29:36 by khsadira          #+#    #+#             */
-/*   Updated: 2018/10/10 09:26:55 by khsadira         ###   ########.fr       */
+/*   Updated: 2018/10/11 09:53:54 by khsadira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static char		*ft_to_command(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[j] && str[j] == ' ')
+	while (str[j] && (str[j] == ' ' || str[j] == '\t'))
 		j++;
 	cmd = NULL;
 	i = j;
 	while (str[i])
 	{
-		if (str[i] == ' ')
+		if (str[i] == ' ' || str[i] == '\t')
 			return (ft_strsub(str, j, i - j));
 		i++;
 	}
@@ -115,6 +115,6 @@ t_lst			*ft_check_path(char **path_tab, char *cmd_word)
 		return (NULL);
 	}
 	list->cmd = cmd;
-	list->arg = ft_strsplit(cmd_word, ' ');
+	list->arg = ft_split_whitespaces(cmd_word);
 	return (list);
 }
