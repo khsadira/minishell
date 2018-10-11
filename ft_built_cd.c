@@ -82,7 +82,8 @@ static t_env		*ft_cd_oldpwd(t_env *env)
 		return (env);
 	}
 	cwd = ft_strdup(tmp);
-	pwd = ft_search_env("PWD", env);
+	if (!(pwd = ft_search_env("PWD", env)))
+		pwd = "";
 	env = ft_setenv_c("OLDPWD", ft_strdup(pwd), env);
 	chdir(cwd);
 	ft_strdel(&cwd);
