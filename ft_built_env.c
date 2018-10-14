@@ -74,6 +74,7 @@ static void		ft_b_exec(char **cmd, int i, t_env *l_env)
 void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 {
 	int	c;
+	char	*tmp;
 
 	while (list->arg[i] && i != a)
 	{
@@ -86,9 +87,11 @@ void			ft_built_env(t_lst *list, t_env *l_env, int i, int a)
 		}
 		else if ((c = ft_strichr(list->arg[i], '=')) != -1)
 		{
-			l_env = ft_setenv_c(ft_strsub(list->arg[i], 0, c),
+			tmp = ft_strsub(list->arg[i], 0, c);
+			l_env = ft_setenv_c(tmp,
 				ft_strsub(list->arg[i], c + 1, ft_strlen(list->arg[i]) - c),
 				l_env);
+			ft_strdel(&tmp);
 			return (ft_built_env(list, l_env, i + 1, a));
 		}
 		i++;

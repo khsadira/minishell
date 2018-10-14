@@ -40,6 +40,7 @@ static t_env		*ft_prog(t_env *env)
 	{
 		write(1, "\n", 1);
 		ft_strdel(&line);
+		exit(1);
 	}
 	else
 		exit(1);
