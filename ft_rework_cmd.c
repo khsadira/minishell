@@ -25,8 +25,8 @@ static char	*ft_put_arg_tild(char *arg, int i, t_env *env)
 	tmp2 = ft_strsub(arg, i + 1, j - (i + 1));
 	tmp = ft_strfjoin(&tmp, home);
 	tmp = ft_strfjoin(&tmp, tmp2);
-	free(arg);
-	free(tmp2);
+	ft_strdel(&arg);
+	ft_strdel(&tmp2);
 	return (tmp);
 }
 
