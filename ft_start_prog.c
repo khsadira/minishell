@@ -23,12 +23,31 @@ char			**ft_get_path(t_env *env)
 	return (NULL);
 }
 
+static t_env	*ft_createnv_name(char *name, t_env *env)
+{
+	t_env	*h_env;
+
+	h_env = env;
+	while (env)
+		env = env->next;
+	env = ft_newenv(ft_strdup(name), ft_strdup(""));
+	h_env = ft_addenv(h_env, env);
+	return (h_env);
+}
+
+
 static t_env	*ft_call_builtin(t_lst *list, t_env *l_env, int builtin)
 {
 	if (builtin == 4)
 		ft_built_echo(list, l_env);
 	else if (builtin == 5)
+	{
+		if (!ft_search_env("PWD", l_env))
+			l_env = ft_createnv_name("PWD", l_env);
+		if (!ft_search_env("OLDPWD", l_env))
+			l_env = ft_createnv_name("OLDPWD", l_env);
 		l_env = ft_built_cd(list, l_env);
+	}
 	return (l_env);
 }
 
