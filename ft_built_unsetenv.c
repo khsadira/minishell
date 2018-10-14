@@ -45,6 +45,8 @@ t_env			*ft_unsetenv(t_lst *list, t_env *l_env)
 	int	i;
 	int	len;
 
+	if (!l_env)
+		return (NULL);
 	len = ft_dstrlen(list->arg);
 	i = 1;
 	if (len < 2)
