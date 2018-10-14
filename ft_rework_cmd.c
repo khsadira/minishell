@@ -46,10 +46,16 @@ static char	*ft_put_arg_dol(char *arg, int i, t_env *env)
 	tmp = ft_strsub(arg, 0, i);
 	tmp2 = ft_strsub(arg, i + 1, j - (i + 1));
 	name = ft_search_env(tmp2, env);
+	if (!name)
+	{
+		ft_strdel(&tmp);
+		ft_strdel(&tmp);
+		return (arg);
+	}
 	tmp = ft_strfjoin(&tmp, name);
 	tmp = ft_strfjoin(&tmp, arg + j);
-	free(tmp2);
-	free(arg);
+	ft_strdel(&tmp2);
+	ft_strdel(&arg);
 	return (tmp);
 }
 
