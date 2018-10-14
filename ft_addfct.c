@@ -66,8 +66,7 @@ void		ft_aff_prompt(void)
 		ft_putstr(tmp);
 	ft_putstr("> ");
 	ft_putstr("\033[0m");
-	if (tmp)
-		ft_strdel(&tmp);
+	ft_strdel(&tmp);
 }
 
 int			ft_regnl(char **str)
