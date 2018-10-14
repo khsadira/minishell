@@ -62,10 +62,12 @@ void		ft_aff_prompt(void)
 	}
 	ft_putstr("\033[0;31m");
 	ft_putstr("<");
-	ft_putstr(tmp);
+	if (tmp)
+		ft_putstr(tmp);
 	ft_putstr("> ");
 	ft_putstr("\033[0m");
-	free(tmp);
+	if (tmp)
+		ft_strdel(&tmp);
 }
 
 int			ft_regnl(char **str)
