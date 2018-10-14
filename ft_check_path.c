@@ -40,18 +40,18 @@ static t_lst	*ft_up_list(char *path, char *cmd, t_lst *list, int built)
 	new_ele = NULL;
 	if (built == 2)
 	{
-		new_ele = ft_newele(ft_strdup(cmd));
-		new_ele->built = 0;
+		if ((new_ele = ft_newele(ft_strdup(cmd))))
+			new_ele->built = 0;
 	}
 	else if (built == 0)
 	{
-		new_ele = ft_newele(ft_strdup(path));
-		new_ele->built = 0;
+		if ((new_ele = ft_newele(ft_strdup(path))))
+			new_ele->built = 0;
 	}
 	else
 	{
-		new_ele = ft_newele(ft_strdup(cmd));
-		new_ele->built = 1;
+		if ((new_ele = ft_newele(ft_strdup(cmd))))
+			new_ele->built = 1;
 	}
 	list = ft_addlist(list, new_ele);
 	return (list);

@@ -12,7 +12,6 @@
 
 #ifndef FT_MINISHELL_H
 # define FT_MINISHELL_H
-
 # include "./libft/libft.h"
 # include <sys/stat.h>
 # include <dirent.h>
