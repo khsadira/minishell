@@ -49,7 +49,7 @@ static char	*ft_put_arg_dol(char *arg, int i, t_env *env)
 	if (!name)
 	{
 		ft_strdel(&tmp);
-		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
 		return (arg);
 	}
 	tmp = ft_strfjoin(&tmp, name);
